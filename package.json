@@ -1,0 +1,25 @@
+{
+  "name": "authenticate-me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Irinivk/API-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Irinivk/API-project/issues"
+  },
+  "homepage": "https://github.com/Irinivk/API-project#readme",
+  "dependencies": {
+    "build": "^0.1.4",
+    "sequelize": "^6.29.3",
+    "start": "^5.1.0"
+  }
+}
