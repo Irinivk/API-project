@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       );
       Review.hasMany(
         models.ReviewImage,
-        { foreignKey: 'reviewId', onDelete: 'CASCADE' }
+        { foreignKey: 'reviewId', onDelete: 'CASCADE', hooks: true }
       )
     }
   }
@@ -33,13 +33,21 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     spotId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false
     },
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    review: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Review',

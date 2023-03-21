@@ -22,15 +22,15 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
-        url: "image url"
+        url: "blahblah url"
       },
       {
         reviewId: 2,
-        url: "image url"
+        url: "okay url"
       },
       {
         reviewId: 3,
-        url: "image url"
+        url: "yikes url"
       }
     ], {});
   },
@@ -45,7 +45,7 @@ module.exports = {
     options.tableName = 'ReviewImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      id: { [Op.in]: [1, 2, 3] }
+      url: { [Op.in]: ["blahblah url", "okay url", "yikes url"] }
     }, {});
   }
 };
