@@ -66,13 +66,7 @@ router.get('/', async (req, res) => {
 
 // Get All Spots owned by current User
 router.get('/current', requireAuth, async (req, res) => {
-    
-    // const spots = await Spot.findAll({
-    //     where: {
-    //         ownerId: req.user.id
-    //     }
-    // })
-
+   
     const userSpot = await Spot.findAll({
         where: {
             ownerId: req.user.id
@@ -93,29 +87,37 @@ router.get('/current', requireAuth, async (req, res) => {
 
 // get details of Spot from spotId
 router.get('/:spotId', async (req, res) => {
-    // console.log(req.params)
-    const spotId = await Spot.findByPk(req.params.spotId, {
-        include: [{ model: Review, as: 'Reviews', attributes: [] },
-            { model: SpotImage, attributes: ['id', 'url', 'preview'] }, 
-            { model: User, as: "Owner", attributes: ['id', 'firstName', 'lastName'] }],
-        attributes: {
-            include: [
-                [sequelize.fn("COUNT", sequelize.col('Reviews.review')), 'numReviews'],
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating']
-            ]
+
+    const spotId = await Spot.findOne( {
+        where: {
+            id: req.params.spotId
         },
-        group: ['Spot.id', 'SpotImage.id', 'User.id']
+        include: [{ model: SpotImage, attributes: ['id', 'url', 'preview'] }, 
+            { model: User, as: "Owner", attributes: ['id', 'firstName', 'lastName'] }]
     })
 
-    
-
-    if (!spotId) { 
+     if (!spotId) { 
         return res.status(404).json({
             "message": "Spot couldn't be found"
         })
     }
 
-    // console.log(spotId)
+    const spotReviews = await Review.findOne({
+        attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"]],
+        where: {
+            spotId: req.params.spotId
+        }
+    });
+
+    const reviews = await spotId.getReviews();
+
+   console.log(spotReviews.dataValues.avgStarRating)
+
+    const totalReviews = reviews.length;
+
+    spotId.dataValues['numReviews'] = totalReviews; 
+    spotId.dataValues['avgStarRating'] = spotReviews.dataValues.avgStarRating
+
     res.status(200).json(spotId)
 });
 
@@ -138,7 +140,7 @@ router.post('/', requireAuth, validSpots, async (req, res) => {
         price 
     })
     
-    // await newspot.validate()
+
     await newspot.save()
    
     res.status(201).json(newspot)
@@ -309,7 +311,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
         }
     });
 
-    // console.log(spot)
     if (theReview) {
         res.status(403).json({
             "message": "User already has a review for this spot"
