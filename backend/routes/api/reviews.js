@@ -123,11 +123,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 router.put('/:reviewId', requireAuth, async (req, res) => {
     const { review, stars } = req.body
 
-    if (review.userId !== req.user.id) {
-        res.status(404).json({
-            "message": "Invalid"
-        });
-    }
+   
 
     const thereview = await Review.findByPk(req.params.reviewId)
 
@@ -137,7 +133,11 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         }
     )
     }
-
+    if (thereview.userId !== req.user.id) {
+        res.status(404).json({
+            "message": "Invalid"
+        });
+    }
     thereview.review = review
     thereview.stars = stars
 
