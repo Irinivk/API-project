@@ -1,12 +1,12 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const { Op } = require("sequelize");
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot, Review, SpotImage, User, sequelize, ReviewImage, Booking } = require('../../db/models');
-const { DATE } = require('sequelize');
 
 const router = express.Router();
 
@@ -47,22 +47,142 @@ const validSpots = [
     handleValidationErrors
 ]
 
+const allspotsquery = [
+    check('page')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage('Page must be greater than or equal to 1'),
+    check('size')
+        .optional()
+        .isInt({ min: 1 })
+        .withMessage('Size must be greater than or equal to 1'),
+    check('maxPrice')
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage('Maximum price must be greater than or equal to 0'),
+    check("minPrice")
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage('Minimum price must be greater than or equal to 0'),
+    handleValidationErrors
+];
+
 //get All Spots
-router.get('/', async (req, res) => {
-    // finding all spots, and adding Review and SpotImage and assigning it preview image
+router.get('/', allspotsquery, async (req, res) => {
+    // getting req.body
+    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+
+
+    //// WASN'T WORKING FIXED ////////
+
+    // allspotquery wasn't working so this is BY HAND
+    if (Number.isNaN(maxLat)) {
+        const err = new Error("Bad Request")
+        err.errors = "Maximum latitude is invalid"
+        err.status = 400;
+        next(err)
+    }
+    if (Number.isNaN(minLat)) {
+        const err = new Error("Bad Request")
+        err.errors = "Minimum latitude is invalid"
+        err.status = 400;
+        next(err)
+    }
+    if (Number.isNaN(maxLng)) {
+        const err = new Error("Bad Request")
+        err.errors = "Maximum longitude is invalid"
+        err.status = 400;
+        next(err)
+    }
+    if (Number.isNaN(minLng)) {
+        const err = new Error("Bad Request")
+        err.errors = "Minimum longitude is invalid"
+        err.status = 400;
+        next(err)
+    }
+
+
+
+
+    /// page and size of pagination 
+    page = parseInt(page);
+    size = parseInt(size)
+
+    // default page and size
+    if (Number.isNaN(page) || !page  || page > 10) page = 1;
+    if (Number.isNaN(size) || !size || size > 20) size = 20;
+    const offset = size * (page - 1);
+
+    const pagination = {};
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size;
+        pagination.offset = offset;
+    }
+
+    // min max error handling and where clause 
+    let where = {};
+    if (minLat) {
+        where.lat = { [Op.gte]: minLat }
+    }
+    if (maxLat) {
+        where.lat = { [Op.lte]: maxLat }
+    }
+    if (minLng) {
+        where.lng = { [Op.gte]: minLng }
+    }
+    if (maxLng) {
+        where.lng = { [Op.lte]: maxLng }
+    }
+    if (minPrice) {
+        where.price = { [Op.gte]: minPrice }
+    }
+    if (maxPrice) {
+        where.price = { [Op.lte]: maxPrice }
+    }
+
+
+    // find all spots
     const spots = await Spot.findAll({
-        include: [{ model: Review, as: 'Reviews', attributes: [] },
-        { model: SpotImage, as: 'SpotImages', attributes: [] }],
-        attributes: {
-            include: [
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
-                [sequelize.col('SpotImages.url'), 'previewImage']
-            ]
-        },
-        group: ['Spot.id', 'SpotImages.url']  
+        where,
+        include: [
+            { model: SpotImage },
+            { model: Review }
+        ],
+        ...pagination
+    });
+
+    // array of spots
+    const spotsList = []
+    spots.forEach(spot => {
+        spotsList.push(spot.toJSON())
+    })  
+
+
+    /////// ERROR ///////
+
+    // images and reviews of spots
+    spotsList.forEach(spot => {
+        spot.SpotImages.forEach(img => {
+            if (img.preview === true) spot.previewImage = img.url
+            else spot.previewImage = 'no preview image found'
+        })
+        if (!spot.SpotImages.length) spot.previewImage = 'no preview image found'
+        delete spot.SpotImages
+
+        let count = 0;
+        let sum = 0;
+        spot.Reviews.forEach(review => {
+            count++;
+            sum += review.stars;
+        })
+        let avg = sum / count;
+        spot.avgRating = avg;
+        if (!spot.Reviews.length) spot.avgRating = 'no average rating'
+        delete spot.Reviews
     })
 
-    res.status(200).json(spots)
+    res.status(200).json({ Spots: spotsList, page, size })
 
 });
 
