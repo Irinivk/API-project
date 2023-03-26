@@ -205,7 +205,7 @@ router.get('/current', requireAuth, async (req, res) => {
     })
     
 
-    res.status(200).json(userSpot)
+    res.status(200).json({Spots: userSpot})
 });
 
 // get details of Spot from spotId
@@ -416,7 +416,7 @@ router.get('/:spotId/reviews', async (req, res) => {
         })
     }
 
-    res.status(200).json(review)
+    res.status(200).json({Reviews: review})
 })
 
 
