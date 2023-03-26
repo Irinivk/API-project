@@ -46,9 +46,14 @@ router.get('/current', requireAuth, async (req, res) => {
         });
         
         // reassigning spotImage
-        booking.Spot.dataValues['previewImage'] = image.url; 
+        if (image) {
+             booking.Spot.dataValues['previewImage'] = image.url; 
+        }
+        if (!image) {
+            booking.Spot.dataValues['previewImage'] = "No spotImages for this spot";
+        }
+       
     }
- 
     res.status(200).json({Bookings: bookn})
 })
 
