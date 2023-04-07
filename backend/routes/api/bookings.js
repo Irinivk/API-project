@@ -134,7 +134,6 @@ router.put('/:bookingId', requireAuth, async (req, res) =>{
 
     // checking to see if bookings date conflicts with other bookings dates. 
     for (let booking of allbk) {
-        // console.log(booking)
 
         const elst = booking.startDate.getTime()
         const aled = booking.endDate.getTime()
@@ -197,7 +196,6 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     // today's date
     const thisdate = new Date().toDateString()
     const td = new Date(thisdate).getTime()
-    console.log(thisdate)
     
     // if the bookings start date is smaller the todays date than invalid
 

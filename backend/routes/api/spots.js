@@ -589,7 +589,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     // comparing dates to new booking
     for (let booking of allbk) {
-        console.log(booking)
 
         const elst = booking.startDate.getTime()
         const aled = booking.endDate.getTime()
