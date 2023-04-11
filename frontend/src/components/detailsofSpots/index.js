@@ -37,7 +37,7 @@ const SpotShow = () => {
             {!spots?.avgStarRating &&
                 <p>New</p>
             }
-                <p>{spots?.avgStarRating.toFixed(2)} · {spots?.numReviews} Review</p>
+                <p>{spots?.avgStarRating} · {spots?.numReviews} Review</p>
         </div>
         <div>
             <p>${spots?.price} night</p>
