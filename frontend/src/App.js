@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Allthespots from "./components/allthespots";
 import SpotShow from "./components/detailsofSpots";
+import SpotForm from "./components/createNewSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
           <Route exact path='/' component={Allthespots} />
+          <Route exact path='/spots/new' component={SpotForm} />
           <Route exact path='/spots/:spotId' component={SpotShow} />
         </Switch>}
     </>
