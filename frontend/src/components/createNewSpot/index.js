@@ -45,7 +45,7 @@ const SpotForm = () => {
         if (image1.length === 0 && image1.endsWith('.png,' && image1.endsWith('.jpg') && image1.endsWith('.jpeg'))) errors.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
 
         setErrors(errors)
-    }, [country, address, city, state, latitude, longitude, description, name, price])
+    }, [country, address, city, state, latitude, longitude, description, name, price, prevImage, image1])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
