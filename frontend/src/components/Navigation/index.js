@@ -21,9 +21,12 @@ function Navigation({ isLoaded }) {
                     : null}
             </div>
             {isLoaded && (
+                <>
                 <li>
                     <ProfileButton user={sessionUser} />
                 </li>
+                
+            </>
             )}
         </ul>
     );
