@@ -1,33 +1,75 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createSpot } from "../../store/spots";
 import { useSelector } from "react-redux";
+import { updateSpot } from "../../store/spots";
+import { useParams } from "react-router-dom";
+import { displaySpot } from "../../store/spots";
 
 
-const SpotForm = () => {
+const EditSpotForm = () => {
     const history = useHistory()
-
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [latitude, setLatitude] = useState()
-    const [longitude, setLongitude] = useState()
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState()
-    const [errors, setErrors] = useState({});
-    const [prevImage, setPrevImage] = useState('')
-    const [image1, setImage1] = useState('')
-    const [image2, setImage2] = useState('')
-    const [image3, setImage3] = useState('')
-    const [image4, setImage4] = useState('')
-    
-
+    const { spotId } = useParams();
     const dispatch = useDispatch()
 
+    const spot = useSelector((state) => state.spots[spotId])
+    
+    const [address, setAddress] = useState(spot?.address)
+    const [city, setCity] = useState(spot?.city)
+    const [state, setState] = useState(spot?.state)
+    const [country, setCountry] = useState(spot?.country)
+    const [latitude, setLatitude] = useState(spot?.lat)
+    const [longitude, setLongitude] = useState(spot?.lng)
+    const [name, setName] = useState(spot?.name)
+    const [description, setDescription] = useState(spot?.description)
+    const [price, setPrice] = useState(spot?.price)
+    const [errors, setErrors] = useState({});
+    // const [prevImage, setPrevImage] = useState(spot?.prevImage)
+    // const [image1, setImage1] = useState('')
+    // const [image2, setImage2] = useState('')
+    // const [image3, setImage3] = useState('')
+    // const [image4, setImage4] = useState('')
+
+    // useEffect(() => {
+    //     setAddress(spot?.address)
+    //     setCity(spot?.city)
+    //     setState(spot?.state)
+    //     setCountry(spot?.country)
+    //     setLatitude(spot?.lat)
+    //     setLongitude(spot?.lng)
+    //     setName(spot?.name)
+    //     setDescription(spot?.description)
+    //     setPrice(spot?.price)
+    // }, [spot])
+    
+
     const sessionUser = useSelector(state => state.session.user);
+    
+   
+    // console.log(sessionUser)
+    // console.log(spot.previewImage)
+
+    useEffect(() => {
+
+        const getSpotDets = async () => {
+            await dispatch(displaySpot(spotId))
+        }
+        getSpotDets();
+
+        // initialValues?.country ? initialValues?.country : ""
+        setAddress(spot?.address)
+        setCity(spot?.city)
+        setState(spot?.state)
+        setCountry(spot?.country)
+        setLatitude(spot?.lat)
+        setLongitude(spot?.lng)
+        setName(spot?.name)
+        setDescription(spot?.description)
+        setPrice(spot?.price)
+        // setPrevImage(spot?.prevImage)
+        
+
+    }, [dispatch, spotId, spot?.address, spot?.city, spot?.state, spot?.country, spot?.lat, spot?.lng, spot?.name, spot?.description, spot?.price])
 
 
     const handleSubmit = async (e) => {
@@ -45,8 +87,8 @@ const SpotForm = () => {
         if (description.length < 30) errors.description = 'Description needs a minimum of 30 characters'
         if (!name.length) errors.name = 'Name is required'
         if (!price) errors.price = 'Price is required'
-        if (!prevImage.length) errors.prevImage = 'Preview image is required.'
-        if (image1.length === 0 && image1.endsWith('.png,' && image1.endsWith('.jpg') && image1.endsWith('.jpeg'))) errors.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
+        // if (!prevImage.length) errors.prevImage = 'Preview image is required.'
+        // if (image1.length === 0 && image1.endsWith('.png,' && image1.endsWith('.jpg') && image1.endsWith('.jpeg'))) errors.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
 
         setErrors(errors)
 
@@ -60,44 +102,47 @@ const SpotForm = () => {
             lng: longitude,
             name,
             description,
-            price
+            price,
         };
 
-        const newImages = [
-            {url: prevImage, preview: true},
-            { url: image1, preview: false },
-            { url: image2, preview: false },
-            { url: image3, preview: false },
-            { url: image4, preview: false }
-        ]
+        console.log(spotId)
 
-        const newspot = await dispatch(createSpot(spot, newImages))
+        // const newImages = [
+        //     { url: prevImage, preview: true },
+        //     { url: image1, preview: false },
+        //     { url: image2, preview: false },
+        //     { url: image3, preview: false },
+        //     { url: image4, preview: false }
+        // ]
 
+        const newspot = await dispatch(updateSpot(spotId, spot))
 
-        history.push(`/spots/${newspot.id}`)
-
-
+        if (newspot) {
+            history.push(`/spots/${spotId}`)
+        }
         
+
     }
 
     return (
+    <div>
         <form onSubmit={handleSubmit}>
-            <h1>Create New Spot</h1>
+            <h1>Update your Spot</h1>
             <h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a
                 reservation.</p>
             <div>
                 <label>
                     Country
-                <input 
-                type="text" 
-                id="country" 
-                placeholder="Country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-               />
+                    <input
+                        type="text"
+                        id="country"
+                        placeholder="Country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                    />
                 </label>
-                {errors.country  && <p className="errors">{errors.country}</p>}
+                {errors.country && <p className="errors">{errors.country}</p>}
                 <label>
                     Street Address
                     <input
@@ -191,7 +236,7 @@ const SpotForm = () => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
-               {errors.price && <p className="errors">{errors.price}</p>}
+                {errors.price && <p className="errors">{errors.price}</p>}
             </div>
             <div>
                 <h6>Liven up your spot with photos</h6>
@@ -200,49 +245,50 @@ const SpotForm = () => {
                     type="text"
                     id="prevImage"
                     placeholder="Preview Image URL"
-                    value={prevImage}
-                    onChange={(e) => setPrevImage(e.target.value)}
+                    // value={prevImage}
+                    // onChange={(e) => setPrevImage(e.target.value)}
                 />
-               {errors.prevImage && <p className="errors">{errors.prevImage}</p>}
+                {/* {errors.prevImage && <p className="errors">{errors.prevImage}</p>} */}
                 <input
                     type="text"
                     id="image"
                     placeholder="Image URL"
-                    value={image1}
-                    onChange={(e) => setImage1(e.target.value)}
+                    // value={image1}
+                    // onChange={(e) => setImage1(e.target.value)}
                 />
-                {errors.image1 && <p className="errors">{errors.image1}</p>}
+                {/* {errors.image1 && <p className="errors">{errors.image1}</p>} */}
                 <input
                     type="text"
                     id="image"
                     placeholder="Image URL"
-                    value={image2}
-                    onChange={(e) => setImage2(e.target.value)}
-                />
-                <input
-                    type="text"
-                    id="image"
-                    placeholder="Image URL"
-                    value={image3}
-                    onChange={(e) => setImage3(e.target.value)}
+                    // value={image2}
+                    // onChange={(e) => setImage2(e.target.value)}
                 />
                 <input
                     type="text"
                     id="image"
                     placeholder="Image URL"
-                    value={image4}
-                    onChange={(e) => setImage4(e.target.value)}
+                    // value={image3}
+                    // onChange={(e) => setImage3(e.target.value)}
+                />
+                <input
+                    type="text"
+                    id="image"
+                    placeholder="Image URL"
+                    // value={image4}
+                    // onChange={(e) => setImage4(e.target.value)}
                 />
             </div>
-            <button 
-            type="submit"
+            <button
+                type="submit"
             >
-            Create Spot
+                Create Spot
             </button>
         </form>
+    </div>
     )
-
+    
 
 }
 
-export default SpotForm
+export default EditSpotForm

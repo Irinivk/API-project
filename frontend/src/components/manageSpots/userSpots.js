@@ -19,10 +19,11 @@ const ManageSpotsIndex = ({ spot }) => {
             <h1>{spot.city}, {spot.state}</h1>
             <h2>${spot.price} night</h2>
             <h3>Rating {num()}</h3>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
         </NavLink> 
-            
+        <NavLink to={`/spots/${spot.id}/edit`}>
+            <button type="button">Update</button>
+        </NavLink> 
+            <button type="button">Delete</button>
         </>
     )
 }
