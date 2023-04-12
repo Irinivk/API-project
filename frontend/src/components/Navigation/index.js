@@ -12,6 +12,14 @@ function Navigation({ isLoaded }) {
             <li>
                 <NavLink exact to="/">Home</NavLink>
             </li>
+            <div className='nav-bar-right'>
+                {sessionUser ? // only render the 'Create a New Spot' if there is a current user
+                    <NavLink
+                        className='create-new-spot'
+                        to="/spots/new"
+                    >Create a New Spot</NavLink>
+                    : null}
+            </div>
             {isLoaded && (
                 <li>
                     <ProfileButton user={sessionUser} />
