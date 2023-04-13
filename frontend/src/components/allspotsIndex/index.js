@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const AllspotsIndex = ({ spot }) => {
 
-    // console.log(spot)
+    
     
     function num() {
         return Number(spot.avgRating).toFixed(2);
