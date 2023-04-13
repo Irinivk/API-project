@@ -14,10 +14,6 @@ const Allthespots = () => {
         dispatch(fetchspots())
     }, [dispatch])
 
-
-    // console.log(spots)
-
-
     // if (!spots) return null;
     return (
         <div>

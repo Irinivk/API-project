@@ -46,8 +46,6 @@ const EditSpotForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     
    
-    // console.log(sessionUser)
-    // console.log(spot.previewImage)
 
     useEffect(() => {
 
@@ -105,7 +103,6 @@ const EditSpotForm = () => {
             price,
         };
 
-        console.log(spotId)
 
         // const newImages = [
         //     { url: prevImage, preview: true },

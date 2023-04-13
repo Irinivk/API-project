@@ -74,7 +74,10 @@ const SpotForm = () => {
         const newspot = await dispatch(createSpot(spot, newImages))
 
 
+        if (newspot) {
         history.push(`/spots/${newspot.id}`)
+        }
+   
 
 
         

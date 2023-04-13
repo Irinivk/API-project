@@ -9,12 +9,19 @@ const ManageSpots = () => {
 
     const spots = useSelector(state => Object.values(state.spots))
 
+
+
     useEffect(() => {
         dispatch(fetchUsersSpot())
     }, [dispatch])
 
+    if (!spots) return null
+
     return (
         <div>
+            <div>
+                <h1>Manage Your Spots</h1>
+            </div>
             {spots.map(spot => (
                 <ManageSpotsIndex
                     spot={spot}

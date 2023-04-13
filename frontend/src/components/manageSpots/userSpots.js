@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import Deletespot from '../DeleteSpot';
 
 const ManageSpotsIndex = ({ spot }) => {
 
@@ -9,22 +11,31 @@ const ManageSpotsIndex = ({ spot }) => {
     return (
         <>
         <div>
-            <h1>Manage Your Spots</h1>
             {!spot && 
                 <NavLink to={'/spots/new'} >Create a New Spot</NavLink>
             }
         </div>
-        <NavLink to={`/spots/${spot.id}`} className="spots-nav-link">
-            <img src={spot.previewImage} alt={spot.name} className="img" />
-            <h1>{spot.city}, {spot.state}</h1>
-            <h2>${spot.price} night</h2>
-            <h3>Rating {num()}</h3>
-        </NavLink> 
-        <NavLink to={`/spots/${spot.id}/edit`}>
-            <button type="button">Update</button>
-        </NavLink> 
-            <button type="button">Delete</button>
+        <div>
+        <div>
+                <NavLink to={`/spots/${spot.id}`} className="spots-nav-link">
+                    <img src={spot.previewImage} alt={spot.name} className="img" />
+                    <h1>{spot.city}, {spot.state}</h1>
+                    <h2>${spot.price} night</h2>
+                    <h3>Rating {num()}</h3>
+                </NavLink> 
+        </div>
+        <div>
+                <NavLink to={`/spots/${spot.id}/edit`}>
+                    <button type="button">Update</button>
+                </NavLink> 
+        </div>
+                <OpenModalMenuItem
+                    itemText="Delete"
+                    modalComponent={<Deletespot spot={spot} />}
+                />
+        </div>
         </>
+        
     )
 }
 
