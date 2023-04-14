@@ -32,9 +32,9 @@ export const editSpot = (spot) => ({
     spot
 })
 
-export const removeSpot = (spotId) => ({
+export const removeSpot = (spot) => ({
     type: REMOVE_SPOT,
-    spotId
+    spot
 })
 
 export const getUserSpots = (spots) => {
@@ -124,13 +124,15 @@ export const deleteSpot = (spot) => async (dispatch) => {
     const res = csrfFetch(`/api/spots/${spot.id}`, {
         method: 'DELETE'
     })
+    console.log(spot.id)
 
-    // const delres = await res.json()
-    dispatch(removeSpot(spot))
+    // const data = await res.json()
+    dispatch(removeSpot(spot.id))
+    // return data
 }
 
 
-const initialState = {userSpots: {}, allSpots: {}}
+const initialState = {userSpots: {}, allSpots: {}, singleSpot: {}}
 const SpotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_SPOTS:
@@ -140,7 +142,9 @@ const SpotsReducer = (state = initialState, action) => {
             });
             return spotsstate
         case RECEIVE_SPOT:
-           return {...state, [action.spot.id]: action.spot}
+           const el = {...state}
+            el.singleSpot = action.spot
+           return el
         case CREATE_SPOT:
             return { ...state, [action.spot.id]: action.spot }
         case UPDATE_SPOT:
@@ -153,7 +157,7 @@ const SpotsReducer = (state = initialState, action) => {
             return Userstate
         case REMOVE_SPOT:
             const newState = { ...state };
-            delete newState[action.spotId];
+            delete newState[action.spot];
             return newState;
         default:
             return state
