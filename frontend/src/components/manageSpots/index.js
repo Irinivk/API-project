@@ -15,7 +15,7 @@ const ManageSpots = () => {
         dispatch(fetchUsersSpot())
     }, [dispatch])
 
-    if (!spots) return null
+    // if (!spots) return null
 
     return (
         <div>
