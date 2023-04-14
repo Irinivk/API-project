@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../reviewForm";
+import DeletingReview from "../deleteReview";
 
 
 const SpotShow = () => {
@@ -90,11 +91,11 @@ const SpotShow = () => {
         return review.userId
     })
 
-    // console.log(spots.ownerId)
+    // console.log(reviews)
     
 
 
-    console.log(reviews)
+    // console.log(reviews)
     return (
         <>
         <div>
@@ -129,18 +130,22 @@ const SpotShow = () => {
                     }   
                 </div>
                 <div className='all-reviews'>
-                    {reviews.length ? reviews.map(review =>
-                        <>
-                        <div>
-                            
-                        </div>
+                    {reviews.length ? reviews.slice().reverse().map(review =>
+                
                         <div className='each-review' key={review.id}>
                             <p>{review.User.firstName}</p>
                             <p>{getMonthName(review.createdAt.split("")[6])}</p>
                             <p>{review.createdAt.split("-")[0]}</p>
                             <p>{review.review}</p>
-                </div>
-                    </>
+                        <div>
+                            {user.id === review.userId &&
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeletingReview review={review} />}
+                                />
+                            }
+                        </div>
+                         </div>
                     ) : 'Be the first to post a review'}
             </div>
         </div>
