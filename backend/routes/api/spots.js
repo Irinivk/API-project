@@ -460,7 +460,8 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     // finding the review
     const theReview = await Review.findOne({
         where: {
-            spotId: req.params.spotId
+            spotId: req.params.spotId,
+            userId: req.user.id
         }
     });
 
