@@ -94,7 +94,7 @@ const SpotShow = () => {
     
 
 
-    // console.log(spots)
+    console.log(reviews)
     return (
         <>
         <div>
