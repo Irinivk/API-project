@@ -12,19 +12,25 @@ import DeletingReview from "../deleteReview";
 
 const SpotShow = () => {
 
-    const { spotId } = useParams()
-
-    const spots = useSelector(state => 
-        state.spots ? state.spots[spotId] : null
-        )
+    const { spotId } = useParams() 
     
-    const reviews = useSelector(state => Object.values(state.reviews.allReviews))
-    // const newR = Object.values(reviews)
-
-    const user = useSelector(state => state.session.user)
-
-    // console.log(user)
     const dispatch = useDispatch()
+
+    // const spots = useSelector(state => 
+    //     state.spots.singleSpot ? state.spots.singleSpot[spotId] : null
+    //     )
+
+        //  const spots = useSelector(state =>
+        // console.log(state.spots.singleSpot)
+        // )
+    
+    const spots = useSelector(state =>
+        state.spots.singleSpot
+        )
+    const user = useSelector(state => state.session.user);
+    const reviewsObj = useSelector(state => state.reviews.spot);
+    const reviews = Object.values(reviewsObj)
+
 
     useEffect(() => {
         dispatch(displaySpot(spotId))
@@ -33,17 +39,36 @@ const SpotShow = () => {
     useEffect(() => {
         dispatch(fetchSpotReviews(spotId))
     }, [dispatch, spotId])
+    
+
+    // console.log(reviewsObj)
+    // console.log(reviews)
+    // console.log(spots)
+
+   if (!spots) return null;
+
+    if (!spots.Owner) return null
+
+    if (!reviews) return null;
 
 
+    // const revn = useSelector(state => state.reviews.allReviews)
+    // const reviews = Object.values(revn)
+
+    // const user = useSelector(state => state.session.user)
+
+    // console.log(user)
+
+    
+
+    // console.log('details of spot the spot received info ------> ', spots)
     // console.log(Object.values(reviews))
 
     // function num() {
     //     return Number(spots?.avgStarRating).toFixed(2);
     // }
 
-    if (!spots) return null;
-
-    if (!spots.Owner) return null
+ 
 
     function rev () {
         let word
@@ -83,17 +108,36 @@ const SpotShow = () => {
     //  }
 
 
-    // const revid = reviews.map(review => {
-    //     return review.id
-    // })
+    const revid = reviews.map(review => {
+        return review.id
+    })
 
     const revUserId = reviews.map(review => {
         return review.userId
     })
 
-    // console.log(reviews)
-    
 
+    // const el = reviews.map(review => {
+    //     return review
+    // })
+
+    // console.log('deatailes of spots component reviews ----------> ', el[7].firstName)
+
+    // let al = el[7][0].firstName
+
+    let boo;
+
+    // console.log(revUserId)
+
+    revUserId.map((el) => {
+        if (el !== user.id || user || spots.ownerId !== user.id) {
+            boo = true
+        } if (el === user.id || !user || spots.ownerId === user.id) {
+            boo = false
+        }
+    })
+    
+    // console.log(boo)
 
     // console.log(reviews)
     return (
@@ -122,18 +166,18 @@ const SpotShow = () => {
                 <div>
                     <FontAwesomeIcon icon={faStar} size="xl" style={{ color: "#212121", }} />
                     <h6>{rev()}</h6>
-                    {spots.ownerId !== user.id && user.id !== revUserId && user &&
+                    {boo &&
                         <OpenModalButton 
                             buttonText="Post Your Review"
                             modalComponent={<ReviewForm spotId={spotId}/>}
                         />
                     }   
                 </div>
-                <div className='all-reviews'>
-                    {reviews.length ? reviews.slice().reverse().map(review =>
+                {/* <div className='all-reviews'>
+                    {reviews.length > 0 ? reviews.slice().reverse().map(review =>
                 
                         <div className='each-review' key={review.id}>
-                            <p>{review.User.firstName}</p>
+                            <p>{review.User.firstName}</p> 
                             <p>{getMonthName(review.createdAt.split("")[6])}</p>
                             <p>{review.createdAt.split("-")[0]}</p>
                             <p>{review.review}</p>
@@ -147,7 +191,25 @@ const SpotShow = () => {
                         </div>
                          </div>
                     ) : 'Be the first to post a review'}
-            </div>
+            </div> */}
+                {reviews.length > 0 && reviews.slice().reverse().map(review => {
+                    return (
+                        <div key={review.id} className="one-review-box">
+                            <h4>{review.User && review.User.firstName}</h4>
+                            <p>{getMonthName(review.createdAt.split("")[6])}</p>
+                            <p>{review.createdAt.split("-")[0]}</p>
+                            <p>{review.review}</p>
+                            <div>
+                                {user.id === review.userId &&
+                                    <OpenModalButton
+                                        buttonText="Delete"
+                                        modalComponent={<DeletingReview review={review} />}
+                                    />
+                                }
+                            </div>
+                        </div>
+                    )
+                })}
         </div>
         </>
     )

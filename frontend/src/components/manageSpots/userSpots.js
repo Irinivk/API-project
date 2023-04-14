@@ -2,12 +2,14 @@ import { NavLink } from 'react-router-dom';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import Deletespot from '../DeleteSpot';
 
+
 const ManageSpotsIndex = ({ spot }) => {
 
     function num() {
         return Number(spot.avgRating).toFixed(2);
     }
     
+    // console.log(spot)
     return (
         <>
         <div>

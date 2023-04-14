@@ -16,7 +16,7 @@ const Allthespots = () => {
 
     // if (!spots) return null;
     return (
-        <div>
+        <div className="all-spots">
                 {spots.map(spot => (
                     <AllspotsIndex
                     spot={spot}

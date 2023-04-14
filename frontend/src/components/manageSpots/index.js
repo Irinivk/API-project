@@ -9,8 +9,8 @@ const ManageSpots = () => {
 
     const spots = useSelector(state => Object.values(state.spots))
 
-
-
+    // console.log(Object.values(spots))
+    
     useEffect(() => {
         dispatch(fetchUsersSpot())
     }, [dispatch])
