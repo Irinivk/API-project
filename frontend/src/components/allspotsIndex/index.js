@@ -20,7 +20,7 @@ const AllspotsIndex = ({ spot }) => {
     return (
         <div title={spot.name} className="spot-card">
             <NavLink to={`/spots/${spot.id}`} >
-                <div>
+                <div className='imagespot'>
                     <img src={spot.previewImage} alt="spot image" />
                 </div>
                 <div className="spot-details">

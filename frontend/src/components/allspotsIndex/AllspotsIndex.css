@@ -1,20 +1,10 @@
-.spot-card {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
+div.spot-card {
+    display: inline-block;
+    flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
 }
 
-.spot-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: small;
-}
-
-.spot-place {
-    text-decoration: none;
-}
-
-.spot-card img {
-    height: 200px;
-    width: 100%;
+img {
+    width: 50px;
 }
