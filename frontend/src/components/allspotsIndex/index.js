@@ -19,17 +19,17 @@ const AllspotsIndex = ({ spot }) => {
 
     return (
         <div title={spot.name} className="spot-card">
-            <NavLink to={`/spots/${spot.id}`} >
+            <NavLink to={`/spots/${spot.id}`} className="link">
                 <div className='imagespot'>
                     <img src={spot.previewImage} alt="spot image" />
                 </div>
                 <div className="spot-details">
-                    <h1 className="spot-place">{spot.city}, {spot.state}</h1>
-                    <FontAwesomeIcon icon={faStar} size="xl" style={{ color: "#212121", }} />
-                <div className="fa-solid fa-star">
+                    <h1>{spot.city}, {spot.state}</h1>
+                <div className='icons'>
+                    <FontAwesomeIcon icon={faStar} size="l" style={{ color: "#212121", }} />
                     <p>{num()}</p>
+                </div>    
                 </div>
-            </div>
             <h2>${spot.price} night</h2>
             </NavLink>  
         </div>

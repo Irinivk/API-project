@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { createSpot } from "../../store/spots";
 import { useSelector } from "react-redux";
 import { addImage } from "../../store/spots";
+import './createnewspot.css'
 
 
 const SpotForm = () => {
@@ -196,21 +197,21 @@ const SpotForm = () => {
                 {/* {errors.longitude && <p className="errors">{errors.longitude}</p>} */}
                 <p className="errors">{errors.longitude}</p>
             </div>
-            <div>
+            <div className="descriptionbox">
                 <h3>Describe your place to guests</h3>
                 <p>Mention the best features of your space, any special amentities like
                     fast wifi or parking, and what you love about the neighborhood.</p>
                 <input
                     type="text"
                     id="description"
-                    placeholder="Description"
+                    placeholder="Please write at least 30 characters"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 {/* {errors.description && <p className="errors">{errors.description}</p>} */}
                 <p className="errors">{errors.description}</p>
             </div>
-            <div>
+            <div className="namebox">
                 <h4>Create a title for your spot</h4>
                 <p>Catch guests' attention with a spot title that highlights what makes
                     your place special.</p>
@@ -224,7 +225,7 @@ const SpotForm = () => {
                 {/* {errors.name && <p className="errors">{errors.name}</p>} */}
                 <p className="errors">{errors.name}</p>
             </div>
-            <div>
+            <div className="pricebox">
                 <h5>Set a base price for your spot</h5>
                 <p>Competitive pricing can help your listing stand out and rank higher
                     in search results.</p>
@@ -238,7 +239,7 @@ const SpotForm = () => {
                {/* {errors.price && <p className="errors">{errors.price}</p>} */}
                 <p className="errors">{errors.price}</p>
             </div>
-            <div>
+            <div className="photosboxes">
                 <h6>Liven up your spot with photos</h6>
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input
@@ -283,12 +284,15 @@ const SpotForm = () => {
                     onChange={(e) => setImage4({ url: e.target.value, preview: 0 })}
                 />
                 <p className="errors">{errors.image4}</p>
-            </div>
-            <button 
+            </div >
+            <div className="thebutt">
+                <button 
             type="submit"
             >
             Create Spot
             </button>
+            </div>
+            
         </form>
     )
 

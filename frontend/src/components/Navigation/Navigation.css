@@ -1,3 +1,28 @@
 .hidden {
     display: none
 }
+
+
+.top-bar {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.nav-bar-right > a.create-new-spot {
+    display: block;
+    justify-content: flex-end;
+    text-decoration: none;
+    margin-left: 1400px;
+    color: #000000;
+}
+
+img.logo {
+    width: 50px;
+    height: 40px;
+}

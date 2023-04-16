@@ -8,10 +8,12 @@ function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-            </li>
+        <div className='top-bar'>
+            <div className='home-button'>
+                <NavLink exact to="/">
+                    <img className="logo" src='https://www.svgrepo.com/show/36745/airbnb.svg' />
+                </NavLink>
+            </div>
             <div className='nav-bar-right'>
                 {sessionUser ? // only render the 'Create a New Spot' if there is a current user
                     <NavLink
@@ -21,14 +23,12 @@ function Navigation({ isLoaded }) {
                     : null}
             </div>
             {isLoaded && (
-                <>
-                <li>
+                <div className='profile-button'>
                     <ProfileButton user={sessionUser} />
-                </li>
-                
-            </>
+                </div>
+        
             )}
-        </ul>
+        </div>
     );
 }
 

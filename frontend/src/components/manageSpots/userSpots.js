@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import Deletespot from '../DeleteSpot';
+import './userspots.css'
 
 
 const ManageSpotsIndex = ({ spot }) => {
@@ -11,7 +12,7 @@ const ManageSpotsIndex = ({ spot }) => {
     
     // console.log(spot)
     return (
-        <>
+        <div className='allyourspots'>
         <div>
             {!spot && 
                 <NavLink to={'/spots/new'} >Create a New Spot</NavLink>
@@ -36,7 +37,7 @@ const ManageSpotsIndex = ({ spot }) => {
                     modalComponent={<Deletespot spot={spot} />}
                 />
         </div>
-        </>
+        </div>
         
     )
 }

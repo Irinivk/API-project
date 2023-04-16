@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import './ProfileButton.css'
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -44,13 +45,18 @@ function ProfileButton({ user }) {
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
     return (
-        <>
+        <div className="userButton">  
             <button onClick={openMenu}>
-                <i className="fas fa-user-circle" />
+                <div className="menuIcon">
+                    <i className="fa-solid fa-bars" />
+                </div>
+                <div className="userIcon">
+                    <i className="fas fa-user-circle" />
+                </div>
             </button>
-            <ul className={ulClassName} ref={ulRef}>
+            <div className={ulClassName} ref={ulRef}>
                 {user ? (
-                    <>
+                    <div className="userInfo">
                         <li>{user.username}</li>
                         <li>{user.firstName} {user.lastName}</li>
                         <li>{user.email}</li>
@@ -66,9 +72,9 @@ function ProfileButton({ user }) {
                             <button onClick={logout}>Log Out</button>
                         </li>
                     
-                    </>
+                    </div>
                 ) : (
-                    <>
+                    <div className="logIn">
                         <OpenModalMenuItem
                             itemText="Log In"
                             onItemClick={closeMenu}
@@ -79,10 +85,10 @@ function ProfileButton({ user }) {
                             onItemClick={closeMenu}
                             modalComponent={<SignupFormModal />}
                         />
-                    </>
+                    </div>
                 )}
-            </ul>
-        </>
+            </div>
+        </div>
     );
 }
 

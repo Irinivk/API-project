@@ -2,6 +2,7 @@ import ManageSpotsIndex from "./userSpots"
 import { fetchUsersSpot } from "../../store/spots"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import './indexspots.css'
 
 const ManageSpots = () => {
 
@@ -18,16 +19,19 @@ const ManageSpots = () => {
     // if (!spots) return null
 
     return (
-        <div>
-            <div>
+        <div className="all">
+            <div className="title">
                 <h1>Manage Your Spots</h1>
+            </div >
+            <div className="spotCards">
+                {spots.map(spot => (
+                    <ManageSpotsIndex
+                         spot={spot}
+                         key={spot.id}
+                    />
+                 ))}
             </div>
-            {spots.map(spot => (
-                <ManageSpotsIndex
-                    spot={spot}
-                    key={spot.id}
-                />
-            ))}
+            
         </div>
     )
 }

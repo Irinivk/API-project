@@ -1,8 +1,13 @@
-.all-spots {
+.title > h1 {
+    font-size: 40px;
+    font-weight: normal;
+    margin-left: 160px;
+}
+
+.all > .spotCards {
     display: grid;
     grid-gap: 1em;
     justify-items: center;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(22.3em, 21em));
 }
-

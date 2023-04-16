@@ -1,0 +1,7 @@
+.allyourspots {
+    display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        width: 350px;
+}
