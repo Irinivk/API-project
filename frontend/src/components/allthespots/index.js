@@ -16,9 +16,9 @@ const Allthespots = () => {
 
     // if (!spots) return null;
 
-    console.log(spots)
+    // console.log(spots.name)
     return (
-        <div className="all-spots">
+        <div className="all-spots" data-tooltip=''>
                 {spots.map(spot => (
                     <AllspotsIndex
                     spot={spot}

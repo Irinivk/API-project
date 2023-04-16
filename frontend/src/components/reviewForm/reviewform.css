@@ -1,0 +1,21 @@
+.post-new-review-form > input {
+    width: 220px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.stars-post-review {
+    display: flex;
+}
+
+.stars-post-review > h2 {
+    font-size: small;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin-top: 0%;
+    margin-left: 10px;
+}
+
+.post-new-review-form > button {
+    margin-top: 10px;
+}

@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteReview } from "../../store/reviews";
-// import { useSelector } from "react-redux";
+import './deletereview.css'
 
 
 const DeleteReview = ({ review })  => {

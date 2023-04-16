@@ -1,0 +1,18 @@
+form.delete-a-spot-form > .delete-no {
+    width: 150px;
+    height: 35px;
+}
+
+form.delete-a-spot-form> .delete-yes {
+    background-color: red;
+    width: 150px;
+    height: 35px;
+    color: white;
+    margin-left: 10px;
+}
+
+form.delete-a-spot-form {
+    display: flex;
+    flex-direction: row;
+}
+

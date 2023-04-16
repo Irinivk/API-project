@@ -19,7 +19,7 @@ const ManageSpotsIndex = ({ spot }) => {
     // console.log(spot)
     return (
         <div className='allyourspots'>
-                <div className='userspotcard'>
+                <div className='userspotcard'  data-tip={spot.name}>
                     <div>
                         <NavLink to={`/spots/${spot.id}`} className="spots-nav-link">
                             <div className='userspotimage'>
