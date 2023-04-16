@@ -42,13 +42,14 @@ function SignupFormModal() {
     };
 
     return (
-        <>
+        <div className="signupform">
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='signup'>
                 <label>
                     Email
                     <input
                         type="text"
+                        id="signupinput"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -59,6 +60,7 @@ function SignupFormModal() {
                     Username
                     <input
                         type="text"
+                        id="signupinput"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -69,6 +71,7 @@ function SignupFormModal() {
                     First Name
                     <input
                         type="text"
+                        id="signupinput"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
@@ -79,6 +82,7 @@ function SignupFormModal() {
                     Last Name
                     <input
                         type="text"
+                        id="signupinput"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
@@ -89,6 +93,7 @@ function SignupFormModal() {
                     Password
                     <input
                         type="password"
+                        id="signupinput"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -99,6 +104,7 @@ function SignupFormModal() {
                     Confirm Password
                     <input
                         type="password"
+                        id="signupinput"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
@@ -109,7 +115,7 @@ function SignupFormModal() {
                 )}
                 <button type="submit">Sign Up</button>
             </form>
-        </>
+        </div>
     );
 }
 

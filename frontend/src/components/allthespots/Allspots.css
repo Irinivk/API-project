@@ -1,7 +1,8 @@
-all-spots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0 auto;
-    justify-content: space-around;
+.all-spots {
+    display: grid;
+    grid-gap: 1em;
+    justify-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(22.3em, 21em));
 }
+

@@ -1,0 +1,30 @@
+.editingdesc {
+    border-top: black solid;
+    margin-top: 20px;
+}
+
+.editingtitle {
+    border-top: black solid;
+    margin-top: 20px;
+}
+
+.editingprice {
+    border-top: black solid;
+    margin-top: 20px;
+}
+
+.editingimages {
+    border-top: black solid;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#editingbutton {
+    margin-left: 500px;
+    width: 150px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #ff5d63;
+}

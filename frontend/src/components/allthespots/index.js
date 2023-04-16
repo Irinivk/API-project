@@ -15,6 +15,8 @@ const Allthespots = () => {
     }, [dispatch])
 
     // if (!spots) return null;
+
+    console.log(spots)
     return (
         <div className="all-spots">
                 {spots.map(spot => (

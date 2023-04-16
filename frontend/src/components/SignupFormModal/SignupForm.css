@@ -1,0 +1,27 @@
+.signupform {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+}
+
+.signup {
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.signup > label {
+    width: 200px;
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#signupinput {
+    width: 270px;
+    height: 25px;
+}
