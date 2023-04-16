@@ -24,7 +24,17 @@ form > p {
     margin-top: 5px;
 }
 
-input {
+#country,
+#Address,
+#City,
+#State,
+#Latitude,
+#Longitude,
+#description,
+#name,
+#price,
+#prevImage,
+#image {
     width: 100%;
     height: 30px;
     border: 0.2rem solid;

@@ -118,7 +118,7 @@ const SpotForm = () => {
    
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='createspot'>
             <h1>Create New Spot</h1>
             <h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a
