@@ -7,6 +7,8 @@ import SignupFormModal from '../SignupFormModal';
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
@@ -49,20 +51,20 @@ function ProfileButton({ user }) {
 
     return (
         <div className="userButton">  
-            <button onClick={openMenu}>
+            <button className="dropbtn">
                 <div className="menuIcon">
-                    <i className="fa-solid fa-bars" />
+                    <FontAwesomeIcon icon={faBars} size="xl" style={{ color: "#212121", }} className='the-icon' />
                 </div>
                 <div className="userIcon">
                     <i className="fas fa-user-circle" />
                 </div>
             </button>
-            <div className={ulClassName} ref={ulRef}>
+            <div className="dropdown-content" ref={ulRef}>
                 {user ? (
                     <div className="userInfo">
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
+                        <li>Hello, {user.firstName}</li>
                         <li>{user.email}</li>
+                        {/* <li>{user.username}</li> */}
                         <div>
                             {sessionUser ?
                                 <NavLink
@@ -71,9 +73,9 @@ function ProfileButton({ user }) {
                                 >Manage Spots</NavLink>
                                 : null}
                         </div>
-                        <li>
+                        <div className="logout-button-home">
                             <button onClick={logout}>Log Out</button>
-                        </li>
+                        </div>
                     
                     </div>
                 ) : (

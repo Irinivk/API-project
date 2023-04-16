@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useEffect } from "react";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -10,6 +11,16 @@ function LoginFormModal() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        const err = {}
+
+        if (credential.length < 4) err.credential = ''
+        if (password.length < 6) err.password = ''
+
+        setErrors(err)
+    }, [credential, password])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,7 +53,7 @@ function LoginFormModal() {
             <form onSubmit={handleSubmit} className='loginUserForm'>
                 
                 <label>
-                    Username or Email
+                    Email
                     <input
                         type="text"
                         id="logininput"
@@ -64,7 +75,9 @@ function LoginFormModal() {
                 {errors.credential && (
                     <p>{errors.credential}</p>
                 )}
-                <button type="submit">Log In</button>
+                <button type="submit"
+                disabled={Boolean(Object.values(errors).length)}
+                >Log In</button>
                 <button className="demo-user" onClick={(e) => DemoUser(e)}>
                     Demo User
                 </button>

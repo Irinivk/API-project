@@ -6,6 +6,7 @@ import Rate from "../rating";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import './reviewform.css'
 
 
 
@@ -54,7 +55,7 @@ return (
     <>
         <h1>How was your stay?</h1>
         {Object.values(errors).length > 0 && <p className="errors">{errors.message}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='post-new-review-form'>
             <input 
                 type="text" 
                 id="stay" 
@@ -62,8 +63,11 @@ return (
                 value={review}
                 onChange={e => setReview(e.target.value)}
             />
-            <Rate rating={rating} onRating={(rate) => setRating(rate)} />
-            <h2>Stars</h2>
+            <div className="stars-post-review">
+                <Rate rating={rating} onRating={(rate) => setRating(rate)} />
+                <h2>Stars</h2>
+            </div>
+            
             <button
                 type="submit"
                 disabled={Boolean(Object.values(errors).length)}

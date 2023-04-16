@@ -1,0 +1,186 @@
+.spot-img-box {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    justify-content: center;
+}
+
+.spot-img-box > img {
+    width: 700px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.nested-img-box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    /* width: 50%; */
+    /* width: 250px; */
+    justify-content: flex-start;
+}
+
+.nested-img-box > img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.all-spot-details {
+    margin: 40px;
+}
+
+.info-box {
+    display: flex;
+}
+
+.reserve-box {
+    display: flex;
+    justify-items: end;
+    margin-left: 400px;
+    margin-bottom: 10px;
+    width: 300px;
+    height: 130px;
+    margin-top: 10px;
+    border: solid;
+    flex-direction: column;
+    border-radius: .3rem;
+    border-width: 0.2rem;
+}
+
+.reserve-box > h4 {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.reserve-box > .icon-reserve-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.second-icon-rev {
+    display: flex;
+    flex-direction: row;
+    margin-left: 100px;
+    align-items: center;
+}
+
+.second-icon-rev > .the-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-reserve-box > h4 {
+    margin-left: 40px;
+    font-weight: normal;
+    font-size: x-large;
+    margin-top: 15px;
+    margin-bottom: 0%;
+    font-size: large;
+}
+
+.reserve-box > h5 {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.reserve-box > button {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reserve-box-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 10px; */
+}
+
+.reserve-box-button > button {
+    width: 250px;
+    height: 30px;
+    background-color: rgb(228, 111, 111);
+    box-shadow: 2px 2px 2px black;;
+    color: white;
+}
+
+.spot-info {
+    border-bottom: 2px solid black;
+}
+
+.spot-owner-info {
+    margin-left: 50px;
+}
+
+.spot-details-title-name {
+    margin-left: 50px;
+}
+
+.spot-details-title-name > h1 {
+    font-size: 50px;
+    font-weight: normal;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.rev-star {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    align-items: center;
+    width: fit-content;
+    height: 50px;
+}
+
+.rev-star > h6 {
+    font-size: large;
+    margin-left: 10px;
+}
+
+.be-first-for-review {
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.be-first-for-review  > button{
+    width: 200px;
+    height: 40px;
+}
+
+.review-created-at {
+    display: flex;
+}
+
+/* .review-created-at > h2 {
+    margin-left: 10px;
+} */
+
+.stars-post-review {
+    margin-top: 0%;
+}
+
+.one-review-box > h4 {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.one-review-box > p {
+    margin-top: 0%;
+}
+
+.post-your-review-now {
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.post-your-review-now > button {
+    width: 200px;
+    height: 40px;
+}
+
+div.reviews-box {
+    margin-left: 80px;
+    margin-top: 10px;
+}

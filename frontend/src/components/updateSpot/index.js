@@ -281,7 +281,7 @@ const EditSpotForm = () => {
                      type="submit"
                      id="editingbutton"
                    >
-                      Create Spot
+                      Update Your Spot
                  </button>
             </div>
             

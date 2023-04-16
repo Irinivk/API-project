@@ -8,6 +8,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../reviewForm";
 import DeletingReview from "../deleteReview";
+import './detailsofspot.css'
 
 
 const SpotShow = () => {
@@ -45,12 +46,15 @@ const SpotShow = () => {
     // console.log(reviews)
     // console.log(spots)
 
+   
+
    if (!spots) return null;
 
     if (!spots.Owner) return null
 
     if (!reviews) return null;
-
+    
+ if (!user) return null
 
     // const revn = useSelector(state => state.reviews.allReviews)
     // const reviews = Object.values(revn)
@@ -130,76 +134,102 @@ const SpotShow = () => {
     // console.log(revUserId)
 
     revUserId.map((el) => {
-        if (el !== user.id || user || spots.ownerId !== user.id) {
+        console.log(el)
+        if (el.length !== 0 && el !== user.id || user || spots.ownerId !== user.id) {
             boo = true
         } if (el === user.id || !user || spots.ownerId === user.id) {
             boo = false
         }
     })
+
+    // let googoo 
+    // if(user.id === undefined) {
+    //     googoo = false
+    // }
+    // if (revUserId.length === 0 && spots.ownerId !== user.id && user.id) {
+    //     googoo = true
+    // }
     
-    // console.log(boo)
+    // console.log(!user.id)
+
 
     // console.log(reviews)
     return (
-        <>
-        <div>
-            <h1>{spots.name}</h1>
-            <h2>{spots.city}, {spots.state}, {spots.country}</h2>
-            <ul>
-                {spots.SpotImages && spots.SpotImages.map(spot => {
-                    return (
-                        <img src={spot.url} alt='location' key={spot.url} />
-                    )
-                })}
-            </ul>
-                <h3>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</h3>
-            <p>{spots.description}</p>
-            
-        </div>
-        <div>
-            <div>
-                    <h4>${spots.price} night</h4> 
-                    <FontAwesomeIcon icon={faStar} size="xl" style={{ color: "#212121", }} />
-                    <h5>{rev()}</h5>
-                    <button onClick={() => alert('Feature coming soon')}>Reserve</button>
+        <div className="all-spot-details">
+        <div className="spot-info">
+            <div className="spot-details-title-name">
+                <h1>{spots.name}</h1>
+                <h2>{spots.city}, {spots.state}, {spots.country}</h2>
             </div>
-                <div>
+                <div className="spot-img-box">
+                    <img src={spots.SpotImages[0].url}></img>
+                    <div className="nested-img-box">
+                        {spots.SpotImages.length > 1 && <img src={spots.SpotImages[1].url}></img>}
+                        {spots.SpotImages.length > 2 && <img src={spots.SpotImages[2].url}></img>}
+                    </div>
+                    <div className="nested-img-box">
+                        {spots.SpotImages.length > 3 && <img src={spots.SpotImages[3].url}></img>}
+                        {spots.SpotImages.length > 4 && <img src={spots.SpotImages[4].url}></img>}
+                    </div>
+        
+            </div>
+                
+            <div className="info-box">
+                    <div className="spot-owner-info">
+                        <h3>Hosted by {spots.Owner.firstName} {spots.Owner.lastName}</h3>
+                         <p>{spots.description}</p>
+                    </div>
+                        <div className='reserve-box'> 
+                            <div className="icon-reserve-box">
+                            <h4>${spots.price} night</h4>
+                            <div className="second-icon-rev"> 
+                                <FontAwesomeIcon icon={faStar} size="xl" style={{ color: "#212121", }} className='the-icon' />
+                                <h5>{rev()}</h5>
+                            </div>
+                            
+                            </div>
+                            <div className="reserve-box-button">
+                                <button onClick={() => alert('Feature coming soon')}>Reserve</button>
+                            </div>
+                            
+                        </div>
+                    
+            </div>
+        </div>
+        <div className="review-and-box">
+            <div className="reviews-details">
+                <div className="rev-star">
                     <FontAwesomeIcon icon={faStar} size="xl" style={{ color: "#212121", }} />
                     <h6>{rev()}</h6>
-                    {boo &&
+                    
+                    
+                </div>
+                    <div className="post-your-review-now">
+                        {boo &&
                         <OpenModalButton 
                             buttonText="Post Your Review"
                             modalComponent={<ReviewForm spotId={spotId}/>}
                         />
-                    }   
-                </div>
-                {/* <div className='all-reviews'>
-                    {reviews.length > 0 ? reviews.slice().reverse().map(review =>
-                
-                        <div className='each-review' key={review.id}>
-                            <p>{review.User.firstName}</p> 
-                            <p>{getMonthName(review.createdAt.split("")[6])}</p>
-                            <p>{review.createdAt.split("-")[0]}</p>
-                            <p>{review.review}</p>
-                        <div>
-                            {user.id === review.userId &&
-                                <OpenModalButton
-                                    buttonText="Delete"
-                                    modalComponent={<DeletingReview review={review} />}
-                                />
-                            }
-                        </div>
-                         </div>
-                    ) : 'Be the first to post a review'}
-            </div> */}
-                {reviews.length > 0 && reviews.slice().reverse().map(review => {
-                    return (
-                        <div key={review.id} className="one-review-box">
-                            <h4>{review.User && review.User.firstName}</h4>
-                            <p>{getMonthName(review.createdAt.split("")[6])}</p>
-                            <p>{review.createdAt.split("-")[0]}</p>
-                            <p>{review.review}</p>
-                            <div>
+                    } 
+                    </div>
+                <div className="be-first-for-review"> 
+                        {revUserId.length === 0 && spots.ownerId !== user.id && user.id &&
+                            <OpenModalButton
+                                buttonText="Be the first to Post a review!"
+                                modalComponent={<ReviewForm spotId={spotId} />}
+                            />
+                        } 
+                    </div>
+                <div className="reviews-box">
+                    {reviews.length > 0 && reviews.slice().reverse().map(review => {
+                        return (
+                            <div key={review.id} className="one-review-box">
+                             <h4>{review.User && review.User.firstName}</h4>
+                             <div className="review-created-at">
+                                <p>{getMonthName(review.createdAt.split("")[6])}, {review.createdAt.split("-")[0]}</p>
+                             </div>
+                             <p>{review.review}</p>
+                            <div className="delete-your-review">
                                 {user.id === review.userId &&
                                     <OpenModalButton
                                         buttonText="Delete"
@@ -208,10 +238,12 @@ const SpotShow = () => {
                                 }
                             </div>
                         </div>
-                    )
-                })}
+                             )
+                             })}
+                </div>
+            </div>
         </div>
-        </>
+        </div>
     )
 
 }

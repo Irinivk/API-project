@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 // import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { useModal } from "../../context/Modal"
+import './deletespot.css'
 
 const Deletespot = ({ spot }) => {
 
@@ -36,9 +37,9 @@ return (
         <h1>Confrm Delete</h1>
         <h2>Are you sure you want to remove this spot
             from the listings?</h2>
-        <form onSubmit={handleDelete}>
-            <button type="submit" onClick={closeModal}> No(Keep Spot)</button>
-            <button type="submit">Yes (Delete Spot)</button>
+        <form onSubmit={handleDelete} className='delete-a-spot-form'>
+            <button type="submit" onClick={closeModal} className='delete-no'> No(Keep Spot)</button>
+            <button type="submit" className="delete-yes">Yes (Delete Spot)</button>
         </form>
     </div>
 )
