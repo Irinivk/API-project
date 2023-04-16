@@ -158,18 +158,17 @@ router.get('/', allspotsquery, async (req, res) => {
         spotsList.push(spot.toJSON())
     })  
 
+    // console.log(spotsList.SpotImages)
 
     /////// ERROR ///////
 
     // images and reviews of spots
     spotsList.forEach(spot => {
-        spot.SpotImages.forEach(img => {
-            if (img.preview === true) spot.previewImage = img.url
-            else spot.previewImage = 'no preview image found'
-        })
+        if (spot.SpotImages[0].preview === true) spot.previewImage = spot.SpotImages[0].url
+        if (spot.SpotImages[0].preview === false) spot.previewImage = 'no preview image found'
         if (!spot.SpotImages.length) spot.previewImage = 'no preview image found'
         delete spot.SpotImages
-
+        
         let count = 0;
         let sum = 0;
         spot.Reviews.forEach(review => {

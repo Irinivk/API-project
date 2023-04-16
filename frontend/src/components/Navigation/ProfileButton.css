@@ -1,0 +1,84 @@
+.userButton>button {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    height: 45px;
+    width: 85px;
+    background-color: #fff;
+    cursor: pointer;
+
+}
+
+.userButton {
+    position: relative;
+    display: inline-block;
+}
+
+.userButton > button:hover {
+    box-shadow: 2px 4px 6px #c7c6c6;
+}
+
+.userButton:hover .profile-dropdown.hidden { 
+    display: block; 
+}
+
+.userIcon {
+    color: #717171;
+    font-size: 30px;
+}
+
+.userInfo {
+    display: flex;
+    font-size: 18px;
+    gap: 8px;
+    flex-direction: column;
+}
+
+.menuIcon {
+    color: #717171;
+    font-size: 15px;
+}
+
+.profile-dropdown.hidden {
+    display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        left: -120px;
+}
+
+.profile-dropdown.hidden > .userInfo {
+        /* display: none; */
+        /* position: relative; */
+        /* background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+        /* z-index: 1; */
+        left: -120px;
+}
+
+.profile-dropdown {
+    color: black;
+    padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+}
+
+.logIn {
+    display: grid;
+}
+
+li {
+    display: grid;
+    justify-content: flex-start;
+    margin-right: 80px;
+    margin-left: 20px;
+    /* margin-top: 2px; */
+    margin-bottom: 5px;
+    align-items: center;
+}

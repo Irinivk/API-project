@@ -1,0 +1,67 @@
+.allyourspots {
+    display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        width: 350px;
+}
+
+.user-spot-details > h1 {
+    display: flex;
+        align-items: center;
+        font-weight: normal;
+        font-size: 0.90em;
+        text-decoration: none;
+        margin-right: 0;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        color: #000000;
+}
+
+.user-spot-details {
+    display: flex;
+    text-decoration: none;
+}
+
+a.spots-nav-link {
+    text-decoration: none;
+}
+
+path {
+    display: flex;
+    justify-content: end;
+}
+
+.user-icons {
+    display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        justify-items: end;
+        margin-left: 130px;
+        /* border-left: 10px; */
+}
+
+.user-icons > p {
+    font-size: small;
+        font-weight: bold;
+        color: #000000;
+}
+
+a.spots-nav-link > h2 {
+    font-size: medium;
+        margin-top: 0%;
+        color: #000000;
+}
+
+div.user-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.user-buttons > li {
+        background-color: buttonface;
+        padding: 1px 6px;
+        border-style: outset;
+        border-color: buttonborder;
+        border-image: initial;
+}

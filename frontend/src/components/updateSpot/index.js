@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { updateSpot } from "../../store/spots";
 import { useParams } from "react-router-dom";
 import { displaySpot } from "../../store/spots";
-
+import './updatedspot.css'
 
 const EditSpotForm = () => {
     const history = useHistory()
@@ -196,7 +196,7 @@ const EditSpotForm = () => {
                 </label>
                 {errors.longitude && <p className="errors">{errors.longitude}</p>}
             </div>
-            <div>
+            <div className="editingdesc">
                 <h3>Describe your place to guests</h3>
                 <p>Mention the best features of your space, any special amentities like
                     fast wifi or parking, and what you love about the neighborhood.</p>
@@ -209,7 +209,7 @@ const EditSpotForm = () => {
                 />
                 {errors.description && <p className="errors">{errors.description}</p>}
             </div>
-            <div>
+            <div className="editingtitle">
                 <h4>Create a title for your spot</h4>
                 <p>Catch guests' attention with a spot title that highlights what makes
                     your place special.</p>
@@ -222,7 +222,7 @@ const EditSpotForm = () => {
                 />
                 {errors.name && <p className="errors">{errors.name}</p>}
             </div>
-            <div>
+            <div className="editingprice">
                 <h5>Set a base price for your spot</h5>
                 <p>Competitive pricing can help your listing stand out and rank higher
                     in search results.</p>
@@ -235,7 +235,7 @@ const EditSpotForm = () => {
                 />
                 {errors.price && <p className="errors">{errors.price}</p>}
             </div>
-            <div>
+            <div className="editingimages">
                 <h6>Liven up your spot with photos</h6>
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input
@@ -276,11 +276,15 @@ const EditSpotForm = () => {
                     // onChange={(e) => setImage4(e.target.value)}
                 />
             </div>
-            <button
-                type="submit"
-            >
-                Create Spot
-            </button>
+            <div className="hugebutt">
+                <button
+                     type="submit"
+                     id="editingbutton"
+                   >
+                      Create Spot
+                 </button>
+            </div>
+            
         </form>
     </div>
     )
