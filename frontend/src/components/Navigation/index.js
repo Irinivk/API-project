@@ -12,6 +12,7 @@ function Navigation({ isLoaded }) {
             <div className='home-button'>
                 <NavLink exact to="/">
                     <img className="logo" src='https://www.svgrepo.com/show/36745/airbnb.svg' />
+                    <h1>IDbnb</h1>
                 </NavLink>
             </div>
             <div className='nav-bar-right'>

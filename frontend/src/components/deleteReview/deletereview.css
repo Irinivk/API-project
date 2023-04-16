@@ -1,0 +1,12 @@
+.delete-modal > .no-button {
+    margin-left: 10px;
+    width: 150px;
+    height: 35px;
+}
+
+.delete-modal> .yes-button {
+    background-color: red;
+    width: 150px;
+    height: 35px;
+    color: white;
+}

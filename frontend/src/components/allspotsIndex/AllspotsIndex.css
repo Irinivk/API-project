@@ -7,6 +7,50 @@
     position: relative;
 }
 
+.spot-card::after,
+.spot-card::before {
+    --scale: 0;
+    --arrow-size: 10px;
+    --tooltip-color: #333;
+    position: absolute;
+    /* content: attr(data-tooltip); */
+    content: '';
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+}
+
+.spot-card::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+    content: attr(data-tooltip);
+    color: white;
+    /* height: 60px; */
+    width: max-content;
+    text-align: center;
+    max-width: 100%;
+    padding: .8rem;
+    border-radius: .3rem;
+    background: var(--tooltip-color);
+}
+
+.spot-card:hover::before,
+.spot-card::after {
+    --scale: 1;
+}
+
+.spot-card:hover::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+    content: '';
+    /* width: 10px;
+    height: 10px;
+    background-color: black; */
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+}
+
 img {
     height: 250px;
     width: 100%;
