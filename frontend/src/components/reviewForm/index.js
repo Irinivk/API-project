@@ -14,14 +14,12 @@ const ReviewForm = ({spotId}) => {
 const history = useHistory()
 
 const { closeModal } = useModal();
-// const { spotId } = useParams()
 const [rating, setRating] = useState(0);
 const [errors, setErrors] = useState({});
 const [review, setReview] = useState('')
 
 const dispatch = useDispatch()
 
-// console.log(spotId)
 
 useEffect(() => {
      const errors = {}

@@ -14,9 +14,8 @@ const Allthespots = () => {
         dispatch(fetchspots())
     }, [dispatch])
 
-    // if (!spots) return null;
+    if (!spots) return null;
 
-    // console.log(spots.name)
     return (
         <div className="all-spots" data-tooltip=''>
                 {spots.map(spot => (
