@@ -88,13 +88,13 @@ const SpotShow = () => {
         }
     })
 
-    let googoo 
+    // let googoo 
   
-    if (revUserId.length === 0 || user === 0) {
-        googoo = true
-    } else {
-        return false
-    }
+    // if (revUserId.length === 0 || user === 0) {
+    //     googoo = true
+    // } else {
+    //     return false
+    // }
     
     return (
         <div className="all-spot-details">
@@ -153,14 +153,6 @@ const SpotShow = () => {
                             modalComponent={<ReviewForm spotId={spotId}/>}
                         />
                     } 
-                    </div>
-                <div className="be-first-for-review"> 
-                        {googoo &&
-                            <OpenModalButton
-                                buttonText="Be the first to Post a review!"
-                                modalComponent={<ReviewForm spotId={spotId} />}
-                            />
-                        } 
                     </div>
                 <div className="reviews-box">
                     {reviews.length > 0 && reviews.slice().reverse().map(review => {
