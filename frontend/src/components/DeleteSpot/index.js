@@ -8,12 +8,6 @@ import './deletespot.css'
 
 const Deletespot = ({ spot }) => {
 
-    // const { spotId } = useParams();
-
-    // const spots = useSelector(state =>
-    //     Object.values(state.spots)
-    // )
-
     const { closeModal } = useModal();
     
     const dispatch = useDispatch();

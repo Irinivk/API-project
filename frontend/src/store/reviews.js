@@ -84,13 +84,11 @@ const ReviewsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_SPOT_REVIEWS:
-            // const newState = {...state, allReviews: {} }
 
-            // console.log(state)
             newState = { ...state, spot: {}, user: {} };
-            // console.log(newState)
+    
             action.reviews.forEach(review => newState.spot[review.id] = review)
-            // console.log(tate)
+    
             return newState
         case CREATE_REVIEWS:
 
@@ -98,33 +96,12 @@ const ReviewsReducer = (state = initialState, action) => {
             newState.spot[action.review.id] = action.review;
             return newState
 
-            // console.log(action.review)
-            // const ate = { ...state, allReviews: {} }
-            // ate.oneReview = action.review
-            // console.log('create review after state ------> ', ate)
-            // return ate
-            // console.log({ ...state.allReviews })
-            // console.log({ ...state.allReviews.allReviews })
-            // console.log(action)
-            // console.log(action.review.review)
-            // console.log(action.review.review.id)
-            // console.log(state)
-            // const res =  { ...state.allReviews }
-            // res[action.review.review.id] = action.review.review
-            // console.log({...state})
-            // console.log(state.allReviews)
-            // console.log(res)
-            // return res
         case REMOVE_REVIEW:
-            // console.log(action)
+
 
             newState = { ...state, spot: { ...state.spot }, user: {} }
             delete newState.spot[action.reviewId]
             return newState
-
-            // const newState = { ...state };
-            // delete newState.allReviews[action.reviewId];
-            // return newState;
 
         default:
             return state

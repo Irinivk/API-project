@@ -16,14 +16,6 @@ const SpotShow = () => {
     const { spotId } = useParams() 
     
     const dispatch = useDispatch()
-
-    // const spots = useSelector(state => 
-    //     state.spots.singleSpot ? state.spots.singleSpot[spotId] : null
-    //     )
-
-        //  const spots = useSelector(state =>
-        // console.log(state.spots.singleSpot)
-        // )
     
     const spots = useSelector(state =>
         state.spots.singleSpot
@@ -42,11 +34,6 @@ const SpotShow = () => {
     }, [dispatch, spotId])
     
 
-    // console.log(reviewsObj)
-    // console.log(reviews)
-    // console.log(spots)
-
-   
 
    if (!spots) return null;
 
@@ -54,25 +41,6 @@ const SpotShow = () => {
 
     if (!reviews) return null;
     
- if (!user) return null
-
-    // const revn = useSelector(state => state.reviews.allReviews)
-    // const reviews = Object.values(revn)
-
-    // const user = useSelector(state => state.session.user)
-
-    // console.log(user)
-
-    
-
-    // console.log('details of spot the spot received info ------> ', spots)
-    // console.log(Object.values(reviews))
-
-    // function num() {
-    //     return Number(spots?.avgStarRating).toFixed(2);
-    // }
-
- 
 
     function rev () {
         let word
@@ -98,20 +66,6 @@ const SpotShow = () => {
         });
     }
 
-    // function checkingUserReviewed () {
-    //     const el = reviews.map((review) => {
-    //         if (user.id === review.userId) {
-    //             return null
-    //         } else {
-    //             return 
-    //         }
-
-    //     })
-
-    //     return el
-    //  }
-
-
     const revid = reviews.map(review => {
         return review.id
     })
@@ -121,17 +75,9 @@ const SpotShow = () => {
     })
 
 
-    // const el = reviews.map(review => {
-    //     return review
-    // })
-
-    // console.log('deatailes of spots component reviews ----------> ', el[7].firstName)
-
-    // let al = el[7][0].firstName
-
     let boo;
 
-    // console.log(revUserId)
+
 
     revUserId.map((el) => {
         console.log(el)
@@ -142,18 +88,14 @@ const SpotShow = () => {
         }
     })
 
-    // let googoo 
-    // if(user.id === undefined) {
-    //     googoo = false
-    // }
-    // if (revUserId.length === 0 && spots.ownerId !== user.id && user.id) {
-    //     googoo = true
-    // }
+    let googoo 
+  
+    if (revUserId.length === 0 || user === 0) {
+        googoo = true
+    } else {
+        return false
+    }
     
-    // console.log(!user.id)
-
-
-    // console.log(reviews)
     return (
         <div className="all-spot-details">
         <div className="spot-info">
@@ -213,7 +155,7 @@ const SpotShow = () => {
                     } 
                     </div>
                 <div className="be-first-for-review"> 
-                        {revUserId.length === 0 && spots.ownerId !== user.id && user.id &&
+                        {googoo &&
                             <OpenModalButton
                                 buttonText="Be the first to Post a review!"
                                 modalComponent={<ReviewForm spotId={spotId} />}
