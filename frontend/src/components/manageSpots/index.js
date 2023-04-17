@@ -11,13 +11,11 @@ const ManageSpots = () => {
 
     const spots = useSelector(state => Object.values(state.spots))
 
-    // console.log(Object.values(spots))
     
     useEffect(() => {
         dispatch(fetchUsersSpot())
     }, [dispatch])
 
-    // if (!spots) return null
 
     return (
         <div className="all">

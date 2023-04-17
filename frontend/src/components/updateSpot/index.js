@@ -24,23 +24,6 @@ const EditSpotForm = () => {
     const [description, setDescription] = useState(spot?.description)
     const [price, setPrice] = useState(spot?.price)
     const [errors, setErrors] = useState({});
-    // const [prevImage, setPrevImage] = useState(spot?.prevImage)
-    // const [image1, setImage1] = useState('')
-    // const [image2, setImage2] = useState('')
-    // const [image3, setImage3] = useState('')
-    // const [image4, setImage4] = useState('')
-
-    // useEffect(() => {
-    //     setAddress(spot?.address)
-    //     setCity(spot?.city)
-    //     setState(spot?.state)
-    //     setCountry(spot?.country)
-    //     setLatitude(spot?.lat)
-    //     setLongitude(spot?.lng)
-    //     setName(spot?.name)
-    //     setDescription(spot?.description)
-    //     setPrice(spot?.price)
-    // }, [spot])
     
 
     const sessionUser = useSelector(state => state.session.user);
@@ -54,7 +37,6 @@ const EditSpotForm = () => {
         }
         getSpotDets();
 
-        // initialValues?.country ? initialValues?.country : ""
         setAddress(spot?.address)
         setCity(spot?.city)
         setState(spot?.state)
@@ -64,7 +46,6 @@ const EditSpotForm = () => {
         setName(spot?.name)
         setDescription(spot?.description)
         setPrice(spot?.price)
-        // setPrevImage(spot?.prevImage)
         
 
     }, [dispatch, spotId, spot?.address, spot?.city, spot?.state, spot?.country, spot?.lat, spot?.lng, spot?.name, spot?.description, spot?.price])
@@ -85,8 +66,7 @@ const EditSpotForm = () => {
         if (description.length < 30) errors.description = 'Description needs a minimum of 30 characters'
         if (!name.length) errors.name = 'Name is required'
         if (!price) errors.price = 'Price is required'
-        // if (!prevImage.length) errors.prevImage = 'Preview image is required.'
-        // if (image1.length === 0 && image1.endsWith('.png,' && image1.endsWith('.jpg') && image1.endsWith('.jpeg'))) errors.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
+    
 
         setErrors(errors)
 
@@ -103,14 +83,6 @@ const EditSpotForm = () => {
             price,
         };
 
-
-        // const newImages = [
-        //     { url: prevImage, preview: true },
-        //     { url: image1, preview: false },
-        //     { url: image2, preview: false },
-        //     { url: image3, preview: false },
-        //     { url: image4, preview: false }
-        // ]
 
         const newspot = await dispatch(updateSpot(spotId, spot))
 

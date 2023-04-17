@@ -47,10 +47,7 @@ const SpotForm = () => {
         if (description.length < 30) err.description = 'Description needs a minimum of 30 characters'
         if (!name.length) err.name = 'Name is required'
         if (!price) err.price = 'Price is required'
-        // if (!prevImage.length) errors.prevImage = 'Preview image is required.'
-        // if (image1.length === 0 && image1.endsWith('.png,' && image1.endsWith('.jpg') && image1.endsWith('.jpeg'))) errors.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
-
-        // setErrors(errors)
+ 
 
         const imageRegex = /\.(gif|jpe?g|png|bmp|svg)$/i;
         if (prevImage.url === null || prevImage.url === "") {
@@ -86,20 +83,6 @@ const SpotForm = () => {
             price
         };
 
-        // const newImages = [
-        //     {url: prevImage, preview: true},
-        //     { url: image1, preview: false },
-        //     { url: image2, preview: false },
-        //     { url: image3, preview: false },
-        //     { url: image4, preview: false }
-        // ]
-
-        // const newspot = await dispatch(createSpot(spot, newImages))
-
-
-        // if (newspot) {
-        // history.push(`/spots/${newspot.id}`)
-        // }
 
         if (!!Object.values(err).length) {
             setErrors(err);

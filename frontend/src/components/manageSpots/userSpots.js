@@ -15,8 +15,7 @@ const ManageSpotsIndex = ({ spot }) => {
             return 'Rating' + ' ' + Number(spot.avgRating).toFixed(2);
         }
     }
-    
-    // console.log(spot)
+
     return (
         <div className='allyourspots'>
                 <div className='userspotcard'  data-tip={spot.name}>
