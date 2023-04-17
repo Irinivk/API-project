@@ -123,7 +123,6 @@ export const deleteSpot = (spot) => async (dispatch) => {
     const res = csrfFetch(`/api/spots/${spot.id}`, {
         method: 'DELETE'
     })
-    console.log(spot.id)
 
     dispatch(removeSpot(spot.id))
 }
