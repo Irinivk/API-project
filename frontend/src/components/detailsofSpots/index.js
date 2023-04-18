@@ -21,8 +21,8 @@ const SpotShow = () => {
         state.spots.singleSpot
         )
     const user = useSelector(state => state.session.user);
-    const reviewsObj = useSelector(state => state.reviews.spot);
-    const reviews = Object.values(reviewsObj)
+    const reviews = useSelector(state => Object.values(state.reviews.spot));
+    // const reviews = Object.values(reviewsObj)
 
 
     useEffect(() => {
@@ -32,7 +32,41 @@ const SpotShow = () => {
     useEffect(() => {
         dispatch(fetchSpotReviews(spotId))
     }, [dispatch, spotId])
-    
+    //  let boo;
+
+    //  console.log(spots)
+
+    // useEffect(() => {
+
+
+    //      return () => {
+    //         if (!spots) return null;
+
+    //         if (!spots.Owner) return null
+            
+    //         if (user === null) {
+    //         boo = false
+    //     } else if (reviews.length === 0 && spots.ownerId !== user.id) {
+    //         boo = true
+    //     } else {
+    //         const revUserId = reviews.map(review => {
+    //             // console.log(reviews.spot.length)
+    //             return review.userId
+    //         })
+    //         revUserId.map((el) => {
+    //             // console.log(rre.length)
+    //             if (el.length === 0 || (el !== user.id && user !== null && spots.ownerId !== user.id)) {
+    //                 boo = true
+    //             } else {
+    //                 boo = false
+    //             }
+    //         })
+    //     }
+    //     }
+
+      
+    // }, [user])
+
 
 
    if (!spots) return null;
@@ -70,31 +104,34 @@ const SpotShow = () => {
         return review.id
     })
 
-    const revUserId = reviews.map(review => {
+
+
+  let boo;
+
+
+    if (user === null) {
+        boo = false
+    } else if (user === null) {  
+         boo = false
+    } else if (reviews.length === 0 && spots.ownerId !== user.id) {
+        boo = true
+    } else {
+        const revUserId = reviews.map(review => {
+        // console.log(reviews.spot.length)
         return review.userId
     })
-
-
-    let boo;
-
-
-
-    revUserId.map((el) => {
-        console.log(el)
-        if (el.length !== 0 && el !== user.id || user || spots.ownerId !== user.id) {
-            boo = true
-        } if (el === user.id || !user || spots.ownerId === user.id) {
-            boo = false
+          revUserId.map((el) => {
+        // console.log(rre.length)
+        if (el.length === 0 || (el !== user.id && user !== null && spots.ownerId !== user.id)) {
+             boo = true
+        } else {
+             boo = false
         }
     })
+    }
+    
 
-    // let googoo 
-  
-    // if (revUserId.length === 0 || user === 0) {
-    //     googoo = true
-    // } else {
-    //     return false
-    // }
+
     
     return (
         <div className="all-spot-details">
@@ -164,7 +201,7 @@ const SpotShow = () => {
                              </div>
                              <p>{review.review}</p>
                             <div className="delete-your-review">
-                                {user.id === review.userId &&
+                                {user && user.id === review.userId &&
                                     <OpenModalButton
                                         buttonText="Delete"
                                         modalComponent={<DeletingReview review={review} />}
