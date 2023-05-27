@@ -21,7 +21,7 @@ Node.js
 https://irini-duni-bnb.onrender.com
 
 ## Instructions:
-To use the website all you have to do is click the link above. 
+To use the website all you have to do is click the link above, and if you have ad-blockers please disable. 
 You can also clone the repo by going over to my github and clicking on 'API-project'
 
 ## GITHUB Account:
