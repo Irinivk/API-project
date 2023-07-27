@@ -89,6 +89,8 @@ const SpotForm = () => {
         } else {
             const newSpot = await dispatch(createSpot(spot));
             const images = [prevImage, image1, image2, image3, image4];
+            console.log(newSpot)
+            console.log(spot)
             for (let i = 0; i < images.length; i++) {
                 const image = images[i];
                 if (image.url) {

@@ -100,9 +100,9 @@ const SpotShow = () => {
         });
     }
 
-    const revid = reviews.map(review => {
-        return review.id
-    })
+    // const revid = reviews.map(review => {
+    //     return review.id
+    // })
 
 
 
@@ -128,10 +128,14 @@ const SpotShow = () => {
              boo = false
         }
     })
-    }
-    
 
-
+    // let googoo 
+  
+    // if (revUserId.length === 0 || user === 0) {
+    //     googoo = true
+    // } else {
+    //     return false
+    // }
     
     return (
         <div className="all-spot-details">
@@ -141,14 +145,14 @@ const SpotShow = () => {
                 <h2>{spots.city}, {spots.state}, {spots.country}</h2>
             </div>
                 <div className="spot-img-box">
-                    <img src={spots.SpotImages[0].url}></img>
+                    <img src={spots.SpotImages[0].url} alt=""></img>
                     <div className="nested-img-box">
-                        {spots.SpotImages.length > 1 && <img src={spots.SpotImages[1].url}></img>}
-                        {spots.SpotImages.length > 2 && <img src={spots.SpotImages[2].url}></img>}
+                        {spots.SpotImages.length > 1 && <img src={spots.SpotImages[1].url} alt=""></img>}
+                        {spots.SpotImages.length > 2 && <img src={spots.SpotImages[2].url} alt=""></img>}
                     </div>
                     <div className="nested-img-box">
-                        {spots.SpotImages.length > 3 && <img src={spots.SpotImages[3].url}></img>}
-                        {spots.SpotImages.length > 4 && <img src={spots.SpotImages[4].url}></img>}
+                        {spots.SpotImages.length > 3 && <img src={spots.SpotImages[3].url} alt=""></img>}
+                        {spots.SpotImages.length > 4 && <img src={spots.SpotImages[4].url} alt=""></img>}
                     </div>
         
             </div>
@@ -216,7 +220,7 @@ const SpotShow = () => {
         </div>
         </div>
     )
-
+   }
 }
 
 export default SpotShow
