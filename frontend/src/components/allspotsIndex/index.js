@@ -23,7 +23,7 @@ const AllspotsIndex = ({ spot }) => {
         <div title={spot.name} className="spot-card" data-tooltip={spot.name}>
             <NavLink to={`/spots/${spot.id}`} className="link">
                 <div className='imagespot'>
-                    <img src={spot.previewImage} alt="spot image" />
+                    <img src={spot.previewImage} alt="spot" />
                 </div>
                 <div className="spot-details">
                     <h1>{spot.city}, {spot.state}</h1>

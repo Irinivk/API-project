@@ -70,124 +70,131 @@ const allspotsquery = [
 //get All Spots
 router.get('/', allspotsquery, async (req, res) => {
     // getting req.body
-    let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    // let {page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
 
 
     //// WASN'T WORKING FIXED ////////
 
     // allspotquery wasn't working so this is BY HAND
-    if (Number.isNaN(maxLat)) {
-        const err = new Error("Bad Request")
-        err.errors = "Maximum latitude is invalid"
-        err.status = 400;
-        next(err)
-    }
-    if (Number.isNaN(minLat)) {
-        const err = new Error("Bad Request")
-        err.errors = "Minimum latitude is invalid"
-        err.status = 400;
-        next(err)
-    }
-    if (Number.isNaN(maxLng)) {
-        const err = new Error("Bad Request")
-        err.errors = "Maximum longitude is invalid"
-        err.status = 400;
-        next(err)
-    }
-    if (Number.isNaN(minLng)) {
-        const err = new Error("Bad Request")
-        err.errors = "Minimum longitude is invalid"
-        err.status = 400;
-        next(err)
-    }
+    // if (Number.isNaN(maxLat)) {
+    //     const err = new Error("Bad Request")
+    //     err.errors = "Maximum latitude is invalid"
+    //     err.status = 400;
+    //     next(err)
+    // }
+    // if (Number.isNaN(minLat)) {
+    //     const err = new Error("Bad Request")
+    //     err.errors = "Minimum latitude is invalid"
+    //     err.status = 400;
+    //     next(err)
+    // }
+    // if (Number.isNaN(maxLng)) {
+    //     const err = new Error("Bad Request")
+    //     err.errors = "Maximum longitude is invalid"
+    //     err.status = 400;
+    //     next(err)
+    // }
+    // if (Number.isNaN(minLng)) {
+    //     const err = new Error("Bad Request")
+    //     err.errors = "Minimum longitude is invalid"
+    //     err.status = 400;
+    //     next(err)
+    // }
 
 
 
 
     /// page and size of pagination 
-    page = parseInt(page);
-    size = parseInt(size)
+    // page = parseInt(page);
+    // size = parseInt(size)
 
-    // default page and size
-    if (Number.isNaN(page) || !page  || page > 10) page = 1;
-    if (Number.isNaN(size) || !size || size > 20) size = 20;
-    const offset = size * (page - 1);
+    // // default page and size
+    // if (Number.isNaN(page) || !page  || page > 10) page = 1;
+    // if (Number.isNaN(size) || !size || size > 20) size = 20;
+    // const offset = size * (page - 1);
 
-    const pagination = {};
-    if (page >= 1 && size >= 1) {
-        pagination.limit = size;
-        pagination.offset = offset;
-    }
+    // const pagination = {};
+    // if (page >= 1 && size >= 1) {
+    //     pagination.limit = size;
+    //     pagination.offset = offset;
+    // }
 
     // min max error handling and where clause 
-    let where = {};
-    if (minLat) {
-        where.lat = { [Op.gte]: minLat }
-    }
-    if (maxLat) {
-        where.lat = { [Op.lte]: maxLat }
-    }
-    if (minLng) {
-        where.lng = { [Op.gte]: minLng }
-    }
-    if (maxLng) {
-        where.lng = { [Op.lte]: maxLng }
-    }
-    if (minPrice) {
-        where.price = { [Op.gte]: minPrice }
-    }
-    if (maxPrice) {
-        where.price = { [Op.lte]: maxPrice }
-    }
+    // let where = {};
+    // if (minLat) {
+    //     where.lat = { [Op.gte]: minLat }
+    // }
+    // if (maxLat) {
+    //     where.lat = { [Op.lte]: maxLat }
+    // }
+    // if (minLng) {
+    //     where.lng = { [Op.gte]: minLng }
+    // }
+    // if (maxLng) {
+    //     where.lng = { [Op.lte]: maxLng }
+    // }
+    // if (minPrice) {
+    //     where.price = { [Op.gte]: minPrice }
+    // }
+    // if (maxPrice) {
+    //     where.price = { [Op.lte]: maxPrice }
+    // }
 
 
     // find all spots
     const spots = await Spot.findAll({
-        where,
-        include: [
-            { model: SpotImage },
-            { model: Review }
-        ],
-        ...pagination
-    });
+        // where,
+        include: [{ model: Review, as: 'Reviews', attributes: [] },
+        {model: SpotImage, as: 'SpotImages', attributes: [] }],
+        attributes: { include: [ 
+                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
+                [sequelize.col('SpotImages.url'), 'previewImage'] 
+            ]},
 
+        group: ['Spot.id', 'SpotImages.url']
+        // ...pagination
+    });
+    // console.log(spots)
     // array of spots
-    const spotsList = []
-    spots.forEach(spot => {
-        spotsList.push(spot.toJSON())
-    })  
+    // const spotsList = []
+    // spots.forEach(spot => {
+    //     spotsList.push(spot.toJSON())
+    // })  
 
     // console.log(spotsList.SpotImages)
 
     /////// ERROR ///////
-
+    // console.log(spotsList.SpotImages)
     // images and reviews of spots
-    spotsList.forEach(spot => {
+    // spotsList.forEach(spot => {
         
-        if (spot.SpotImages[0].preview === true) spot.previewImage = spot.SpotImages[0].url
-        if (spot.SpotImages[0].preview === false) spot.previewImage = 'no preview image found'
-        console.log(spot.SpotImages)
+        // if (spot.SpotImages[0].preview === true) spot.previewImage = spot.SpotImages[0].url
+        // if (spot.SpotImages[0].preview === false) spot.previewImage = 'no preview image found'
+        // console.log(spot)
+        // if (!spot.SpotImages.length) spot.previewImage = 'no preview image found'
         // spot.SpotImages.forEach(img => {
-        //     if (img.preview === true) spot.previewImage = img.url
-        //     else spot.previewImage = 'no preview image found'
+        //     console.log(img)
+        //     if (img.preview === true) {
+        //         return spot.previewImage = img.url
+        //     } else spot.previewImage = 'no preview image found'
         // })
-        if (!spot.SpotImages.length) spot.previewImage = 'no preview image found'
-        delete spot.SpotImages
+        
+        // delete spot.SpotImages
 
-        let count = 0;
-        let sum = 0;
-        spot.Reviews.forEach(review => {
-            count++;
-            sum += review.stars;
-        })
-        let avg = sum / count;
-        spot.avgRating = avg;
-        if (!spot.Reviews.length) spot.avgRating = 'no average rating'
-        delete spot.Reviews
-    })
+        // let count = 0;
+        // let sum = 0;
+        // spot.Reviews.forEach(review => {
+        //     count++;
+        //     sum += review.stars;
+        // })
+        // let avg = sum / count;
+        // spot.avgRating = avg;
+        // if (!spot.Reviews.length) spot.avgRating = 'no average rating'
+        // delete spot.Reviews
+    // })
 
-    res.status(200).json({ Spots: spotsList, page, size })
+    res.status(200).json({ Spots: spots })
 
 });
 
