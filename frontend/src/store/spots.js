@@ -54,7 +54,7 @@ export const fetchspots = () => async (dispatch) => {
 
 export const displaySpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
-
+    console.log(res)
     if (res.ok) {
         const spotDetails = await res.json()
         dispatch(receiveSpot(spotDetails))
@@ -69,8 +69,11 @@ export const createSpot = (spot) => async (dispatch) => {
         body: JSON.stringify(spot)
     })
 
+    console.log(spot)
+
     if (res.ok) {
         const data = await res.json();
+        console.log(data)
         return data;
     }
 }
@@ -84,8 +87,12 @@ export const addImage = (spotId, imageObj) => async (dispatch) => {
         },
         body: JSON.stringify(imageObj),
     });
+
+    console.log(spotId)
+    console.log(imageObj)
     if (res.ok) {
         const data = await res.json();
+        console.log(data)
         return data;
     }
 };
@@ -120,7 +127,7 @@ export const fetchUsersSpot = () => async (dispatch) => {
 }
 
 export const deleteSpot = (spot) => async (dispatch) => {
-    const res = csrfFetch(`/api/spots/${spot.id}`, {
+    csrfFetch(`/api/spots/${spot.id}`, {
         method: 'DELETE'
     })
 
@@ -133,12 +140,15 @@ const SpotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_SPOTS:
             const spotsstate = { ...initialState.allSpots };
+            console.log(action)
             action.spots.Spots.forEach((spot) => {
                 spotsstate[spot.id] = spot
             });
             return spotsstate
         case RECEIVE_SPOT:
+            
            const el = {...state}
+            console.log(state)
             el.singleSpot = action.spot
            return el
         case UPDATE_SPOT:
