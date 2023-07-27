@@ -1,7 +1,7 @@
 import './AllspotsIndex.css'
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom';
 
 
 const AllspotsIndex = ({ spot }) => {

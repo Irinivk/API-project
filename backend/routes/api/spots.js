@@ -165,13 +165,13 @@ router.get('/', allspotsquery, async (req, res) => {
     // images and reviews of spots
     spotsList.forEach(spot => {
         
-        // if (spot.SpotImages[0].preview === true) spot.previewImage = spot.SpotImages[0].url
-        // if (spot.SpotImages[0].preview === false) spot.previewImage = 'no preview image found'
-
-        spot.SpotImages.forEach(img => {
-            if (img.preview === true) spot.previewImage = img.url
-            else spot.previewImage = 'no preview image found'
-        })
+        if (spot.SpotImages[0].preview === true) spot.previewImage = spot.SpotImages[0].url
+        if (spot.SpotImages[0].preview === false) spot.previewImage = 'no preview image found'
+        console.log(spot.SpotImages)
+        // spot.SpotImages.forEach(img => {
+        //     if (img.preview === true) spot.previewImage = img.url
+        //     else spot.previewImage = 'no preview image found'
+        // })
         if (!spot.SpotImages.length) spot.previewImage = 'no preview image found'
         delete spot.SpotImages
 
@@ -369,7 +369,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
             id: req.params.spotId
         }
     })
-
+i
     // checking to see if spot exists
     if (!spot) {
        return res.status(404).json({
