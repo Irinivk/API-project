@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
                 {sessionUser ? // only render the 'Create a New Spot' if there is a current user
                     <NavLink
                         className='create-new-spot'
-                        to="/spots/new"
+                        to="/new/spot/intro"
                     >Airbnb your home</NavLink>
                     : null}
             </div>
