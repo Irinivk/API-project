@@ -31,7 +31,8 @@ module.exports = {
         lng: -122.4730327,
         name: 'App Academy',
         description: 'Place where web developers are created',
-        price: 50.00
+        price: 50.00,
+        type: 'House'
       },
       {
         ownerId: 2,
@@ -43,7 +44,8 @@ module.exports = {
         lng: -112.4732327,
         name: 'Spongebob',
         description: 'Place where nice sponges are created',
-        price: 70.00
+        price: 70.00,
+        type: 'Barn'
       },
       {
         ownerId: 3,
@@ -55,7 +57,8 @@ module.exports = {
         lng: -145.4756327,
         name: 'Mickey Mouse World',
         description: 'Place where nice mice are created',
-        price: 80.00
+        price: 80.00,
+        type: 'Cabin'
       }
     ], {});
   },
