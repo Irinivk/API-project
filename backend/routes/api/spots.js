@@ -44,6 +44,9 @@ const validSpots = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required'),
+    check('type')
+        .exists({ checkFalsy: true })
+        .withMessage('Type of Spot is required'),
     handleValidationErrors
 ]
 
@@ -264,7 +267,7 @@ router.get('/:spotId', async (req, res) => {
 router.post('/', requireAuth, validSpots, async (req, res) => {
     // grabbing user and req body
     const user = req.user
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, price, type } = req.body
 
     // buidling the spot
     const newspot = await Spot.build({
@@ -277,7 +280,8 @@ router.post('/', requireAuth, validSpots, async (req, res) => {
         lng, 
         name, 
         description, 
-        price 
+        price,
+        type 
     })
     
     // saving the spot

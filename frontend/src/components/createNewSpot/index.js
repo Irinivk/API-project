@@ -20,6 +20,7 @@ const SpotForm = () => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState()
     const [errors, setErrors] = useState({});
+    const [type, setType] = useState('');
     const [prevImage, setPrevImage] = useState({ url: "", preview: 1 })
     const [image1, setImage1] = useState({ url: "", preview: 0 })
     const [image2, setImage2] = useState({ url: "", preview: 0 })
@@ -47,6 +48,7 @@ const SpotForm = () => {
         if (description.length < 30) err.description = 'Description needs a minimum of 30 characters'
         if (!name.length) err.name = 'Name is required'
         if (!price) err.price = 'Price is required'
+        if (!type) err.type = 'Type of Spot required'
  
 
         const imageRegex = /\.(gif|jpe?g|png|bmp|svg)$/i;
@@ -69,6 +71,7 @@ const SpotForm = () => {
             err.image4 = "Image URL must end in .png, .jpg, or .jpeg";
         }
 
+        
 
         const spot = {
             ownerId: sessionUser.id,
@@ -80,7 +83,8 @@ const SpotForm = () => {
             lng: longitude,
             name,
             description,
-            price
+            price,
+            type
         };
 
 
@@ -101,6 +105,7 @@ const SpotForm = () => {
         }
     };
    
+    // console.log(spot)
 
     return (
         <form onSubmit={handleSubmit} className='createspot'>
@@ -195,6 +200,14 @@ const SpotForm = () => {
                 />
                 {/* {errors.description && <p className="errors">{errors.description}</p>} */}
                 <p className="errors">{errors.description}</p>
+                 <input
+                    type="text"
+                    id="Type"
+                    placeholder="Please write the type of place you are hosting. (ex. House, Apartment, Barn)"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                />
+                <p className="errors">{errors.type}</p>
             </div>
             <div className="namebox">
                 <h4>Create a title for your spot</h4>
