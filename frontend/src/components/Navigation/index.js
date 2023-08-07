@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
                     <NavLink
                         className='create-new-spot'
                         to="/new/spot/intro"
-                    >Airbnb your home</NavLink>
+                    >IDbnb your home</NavLink>
                     : null}
             </div>
             {isLoaded && (

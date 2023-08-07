@@ -248,7 +248,7 @@ const SpotForm = () => {
                     onChange={(e) => setPrevImage({ url: e.target.value, preview: 1 })}
                 />
                {/* {errors.prevImage && <p className="errors">{errors.prevImage}</p>} */}
-                <p className="errors">{errors.prevImage}</p>
+                <p className="errors">{errors.previewImage}</p>
                 <input
                     type="text"
                     id="image"
