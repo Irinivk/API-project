@@ -19,8 +19,8 @@ function Navigation({ isLoaded }) {
                 {sessionUser ? // only render the 'Create a New Spot' if there is a current user
                     <NavLink
                         className='create-new-spot'
-                        to="/spots/new"
-                    >Create a New Spot</NavLink>
+                        to="/new/spot/intro"
+                    >IDbnb your home</NavLink>
                     : null}
             </div>
             {isLoaded && (

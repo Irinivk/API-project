@@ -44,6 +44,9 @@ const validSpots = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Price per day is required'),
+    check('type')
+        .exists({ checkFalsy: true })
+        .withMessage('Type of Spot is required'),
     handleValidationErrors
 ]
 
@@ -260,11 +263,31 @@ router.get('/:spotId', async (req, res) => {
     res.status(200).json(spotId)
 });
 
+router.get('/:type', async (req, res) => {
+
+    const spots = await Spot.findAll({
+        where: {
+            type: req.params.type
+        },
+        include: [{ model: Review, as: 'Reviews', attributes: [] },
+        {model: SpotImage, as: 'SpotImages', attributes: [] }],
+        attributes: { include: [ 
+                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating'],
+                [sequelize.col('SpotImages.url'), 'previewImage'] 
+            ]},
+
+        group: ['Spot.id', 'SpotImages.url']
+    })
+
+    res.status(200).json({Spots: spots})
+
+})
+
 // create a Spot
 router.post('/', requireAuth, validSpots, async (req, res) => {
     // grabbing user and req body
     const user = req.user
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, price, type } = req.body
 
     // buidling the spot
     const newspot = await Spot.build({
@@ -277,7 +300,8 @@ router.post('/', requireAuth, validSpots, async (req, res) => {
         lng, 
         name, 
         description, 
-        price 
+        price,
+        type 
     })
     
     // saving the spot

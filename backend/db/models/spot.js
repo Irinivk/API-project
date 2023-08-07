@@ -27,6 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         models.Review,
         { foreignKey: 'spotId', onDelete: 'CASCADE', hooks: true }
       );
+      Spot.belongsToMany(
+        models.Amenity,
+        { through: models.SpotAmenity, foreignKey: 'amenityId' }
+      );
+      Spot.belongsToMany(
+        models.SafetyItem,
+        { through: models.SpotSafetyItem, foreignKey: 'safetyItemId' }
+      );
     }
   }
   Spot.init({
@@ -62,6 +70,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     description: DataTypes.STRING,
+    type: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     price: {
       type: DataTypes.DECIMAL,
       allowNull: false

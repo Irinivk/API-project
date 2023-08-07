@@ -7,56 +7,18 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spots', {
+    await queryInterface.createTable('SafetyItems', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users'
-        },
-        onDelete: 'CASCADE'
-      },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      city: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      state: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      country: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lat: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
-      lng: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
-      type: {
+      icon: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -73,7 +35,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Spots";
+    options.tableName = "SafetyItems";
     await queryInterface.dropTable(options);
   }
 };
