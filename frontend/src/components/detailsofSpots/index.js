@@ -106,21 +106,23 @@ const SpotShow = () => {
     //     return review.id
     // })
 
- console.log(reviews)
+//  console.log(spots)
 
   let boo;
 // console.log(spots)
 
     if (user === null) {
         boo = false
+       
     } else if (reviews.length === 0 && spots.ownerId !== user.id) {
-        boo = true
+        boo = true 
+        // console.log(reviews)
     } else {
         const revUserId = reviews.map(review => {
         // console.log(reviews.spot.length)
         return review.userId
     })
-   
+   console.log(revUserId)
           revUserId.map((el) => {
         // console.log(el)
         if (el.length === 0 || (el !== user.id && user !== null && spots.ownerId !== user.id)) {
@@ -129,6 +131,7 @@ const SpotShow = () => {
              boo = false
         }
     })
+}
 
     // let googoo 
   
@@ -221,7 +224,7 @@ const SpotShow = () => {
         </div>
         </div>
     )
-   }
+   
 }
 
 export default SpotShow
