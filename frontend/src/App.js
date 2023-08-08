@@ -22,11 +22,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
           <Route exact path='/' component={Allthespots} />
-          <Route exact path='/spots/:spotId' component={SpotShow} />
+          
           <Route exact path='/spots/:spotId/edit' component={EditSpotForm} />
           <Route exact path='/spots/new' component={SpotForm} />
           <Route exact path='/spots/current' component={ManageSpots} />
-          
+          <Route exact path='/spots/:spotId' component={SpotShow} />
           <Route exact path='/new/spot/intro' component={IntoToCreateSpot} />
           
         </Switch>}
