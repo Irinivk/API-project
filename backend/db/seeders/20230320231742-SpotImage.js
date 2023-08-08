@@ -22,17 +22,17 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        url: "this url",
+        url: "https://www.thehousedesigners.com/images/plans/URD/bulk/6583/the-destination-front-rendering_m.jpg",
         preview: true
       },
       {
         spotId: 2,
-        url: "wow url",
+        url: "https://www.mydomaine.com/thmb/bepet4VMGUG70sCLFNQRdZm9bbg=/2048x0/filters:no_upscale():strip_icc()/SuCasaDesign-Modern-9335be77ca0446c7883c5cf8d974e47c.jpg",
         preview: true
       },
       {
         spotId: 3,
-        url: "cool url",
+        url: "https://st.hzcdn.com/simgs/4d014cde01c9f19e_14-6168/home-design.jpg",
         preview: true
       }
     ], {});
@@ -48,7 +48,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      url: { [Op.in]: ['this url', 'wow url', 'cool url'] }
+      spotId: { [Op.in]: [1, 2, 3] }
     }, {});
   }
 };

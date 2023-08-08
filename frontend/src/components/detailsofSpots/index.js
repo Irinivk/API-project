@@ -71,9 +71,11 @@ const SpotShow = () => {
 
    if (!spots) return null;
 
-    if (!spots.Owner) return null
+    if (!spots.Owner) return null;
 
     if (!reviews) return null;
+
+    // if (!user) return null
     
 
     function rev () {
@@ -104,15 +106,13 @@ const SpotShow = () => {
     //     return review.id
     // })
 
-
+ console.log(reviews)
 
   let boo;
-
+// console.log(spots)
 
     if (user === null) {
         boo = false
-    } else if (user === null) {  
-         boo = false
     } else if (reviews.length === 0 && spots.ownerId !== user.id) {
         boo = true
     } else {
@@ -120,8 +120,9 @@ const SpotShow = () => {
         // console.log(reviews.spot.length)
         return review.userId
     })
+   
           revUserId.map((el) => {
-        // console.log(rre.length)
+        // console.log(el)
         if (el.length === 0 || (el !== user.id && user !== null && spots.ownerId !== user.id)) {
              boo = true
         } else {
@@ -192,7 +193,7 @@ const SpotShow = () => {
                         <OpenModalButton 
                             buttonText="Post Your Review"
                             modalComponent={<ReviewForm spotId={spotId}/>}
-                        />
+                        /> 
                     } 
                     </div>
                 <div className="reviews-box">
