@@ -51,14 +51,14 @@ const validSpots = [
 ]
 
 const allspotsquery = [
-    check('page')
-        .optional()
-        .isInt({ min: 1 })
-        .withMessage('Page must be greater than or equal to 1'),
-    check('size')
-        .optional()
-        .isInt({ min: 1 })
-        .withMessage('Size must be greater than or equal to 1'),
+    // check('page')
+    //     .optional()
+    //     .isInt({ min: 1 })
+    //     .withMessage('Page must be greater than or equal to 1'),
+    // check('size')
+    //     .optional()
+    //     .isInt({ min: 1 })
+    //     .withMessage('Size must be greater than or equal to 1'),
     check('maxPrice')
         .optional()
         .isFloat({ min: 0 })

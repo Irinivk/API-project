@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf"
-import { displaySpot } from "./spots"
+// import { displaySpot } from "./spots"
 
 
 export const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS'
@@ -84,9 +84,9 @@ const ReviewsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case LOAD_SPOT_REVIEWS:
-        console.log(action.reviews)
+        // console.log(action.reviews)
             newState = { ...state, spot: {}, user: {} };
-        console.log(newState)
+        // console.log(newState)
             action.reviews.forEach(review => newState.spot[review.id] = review)
     
             return newState

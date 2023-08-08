@@ -54,7 +54,7 @@ export const fetchspots = () => async (dispatch) => {
 
 export const displaySpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`)
-    console.log(res)
+    // console.log(res)
     if (res.ok) {
         const spotDetails = await res.json()
         dispatch(receiveSpot(spotDetails))
@@ -88,8 +88,8 @@ export const addImage = (spotId, imageObj) => async (dispatch) => {
         body: JSON.stringify(imageObj),
     });
 
-    console.log(spotId)
-    console.log(imageObj)
+    // console.log(spotId)
+    // console.log(imageObj)
     if (res.ok) {
         const data = await res.json();
         console.log(data)
@@ -140,7 +140,7 @@ const SpotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case LOAD_SPOTS:
             const spotsstate = { ...initialState.allSpots };
-            console.log(action)
+            // console.log(action)
             action.spots.Spots.forEach((spot) => {
                 spotsstate[spot.id] = spot
             });
@@ -148,8 +148,9 @@ const SpotsReducer = (state = initialState, action) => {
         case RECEIVE_SPOT:
             
            const el = {...state}
-            console.log(state)
+            
             el.singleSpot = action.spot
+            // console.log(el.singleSpot)
            return el
         case UPDATE_SPOT:
             return { ...state, [action.spot.id]: action.spot }
